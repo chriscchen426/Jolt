@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>Color-Coded Dropdown Nav Menu - Template Monster Demo</title>
+  <meta name="author" content="Jake Rocheleau">
+  <link rel="shortcut icon" href="http://static.tmimgcdn.com/img/favicon.ico">
+  <link rel="icon" href="http://static.tmimgcdn.com/img/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <style type="text/css">
+  
+  
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="wrapper">
+      <ul id="menu" class="clearfix">
+        <li><a href="#">Student Management</a>
+        <ul>
+            <li><a href="add_student.php">Add Student</a></li>
+            <li><a href="std_data.php">View Student</a></li>
+            <li><a href="upload_csv.php">Upload Student (From .CSV File)</a></li>
+          </ul>
+          </li>
+          
+          
+        <li><a href="#">Course Management</a>
+        <ul>
+           <li><a href="course_info.php">View Course</a></li>
+           </ul>
+        </li>
+        <li><a href="#">Test Management</a>
+        <ul>
+            <li><a href="test_info.php">View And Edit Test</a></li>
+            </ul>
+            </li>
+            <li><a href="#">Result Management</a>
+        <ul>
+            <li><a href="rsltmng.php">View Result</a></li>
+            </ul>
+            </li>
+          
+    </div>
+  </nav>
+<script type="text/javascript">
+$(function(){
+  $('a[href="#"]').on('click', function(e){
+    e.preventDefault();
+  });
+  
+  $('#menu > li').on('mouseover', function(e){
+    $(this).find("ul:first").show();
+    $(this).find('> a').addClass('active');
+  }).on('mouseout', function(e){
+    $(this).find("ul:first").hide();
+    $(this).find('> a').removeClass('active');
+  });
+  
+  $('#menu li li').on('mouseover',function(e){
+    if($(this).has('ul').length) {
+      $(this).parent().addClass('expanded');
+    }
+    $('ul:first',this).parent().find('> a').addClass('active');
+    $('ul:first',this).show();
+  }).on('mouseout',function(e){
+    $(this).parent().removeClass('expanded');
+    $('ul:first',this).parent().find('> a').removeClass('active');
+    $('ul:first', this).hide();
+  });
+});
+</script>
+</body>
+</html>
