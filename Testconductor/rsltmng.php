@@ -148,6 +148,7 @@ for($i=1;$i<$num+1;$i++){
 
     echo "<TR><TD>$i<TD>$ap<TD>$bp<TD>$cp<TD>$dp<TD>$arrans[$i]\n";
 }
+///test
 echo "</TABLE>\n";
 	?>
      <table cellpadding="20" cellspacing="30" border="0" style="background:#ffffff url(../images/page.gif);text-align:left;line-height:20px;">
