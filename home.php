@@ -79,6 +79,16 @@ echo '<table cellpadding="30" cellspacing="10" class="datatable">
 		         <td align="left">' . $row['semester'] . '</td>
 		        <td><a href=stdtest.php?id='.$row['cid'].'><strong>View Test</strong></a></td>
 			';
+	echo '<tr>
+
+				<td align="left">' . $row['cid'] . '</td>
+				<td align="left">' . $row['cname'] . '</td>
+				<td align="left">' . $row['tcname'] . '</td>
+		        <td align="left">' . $row['year'] . '</td>
+		         <td align="left">' . $row['semester'] . '</td>
+		        <td><a href=stdlearning.php?id='.$row['cid'].'><strong>View Learning</strong></a></td>
+			';
+
 
 }
 echo '</table><br>';
@@ -91,7 +101,7 @@ echo '</table><br>';
 
  
  <br>
-<h3><a href="viewresult.php">View Result</a></h3>
+<h3><a href="viewresult.php">View Test Result</a></h3>
 <h3><a href="practicetest.php">Practice Test</a></h3>
 
  
