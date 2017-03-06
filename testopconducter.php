@@ -52,6 +52,7 @@ $r = mysqli_fetch_array($result);
 		 //echo $minute_remaining;
 		  *
 		  */
+
 		  
 if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummary']))
 {
@@ -59,8 +60,7 @@ if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummar
 	//next question
 	
 	$answer='unanswered';
-	if($b < $_SESSION['endtime'])
-	{
+
 		//echo $_SESSION['endtime'];
 		if(isset($_POST['markreview']))
 		{
@@ -74,15 +74,16 @@ if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummar
 		{
 			$answer='unanswered';
 		}
+		echo $answer;
 		if(strcmp($answer,"unanswered")!=0)
 		{
 			if(strcmp($answer,"answered")==0)
 			{
-				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and sequence=".$_SESSION['qn']."";
+				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
 			}
 			else
 			{
-				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and sequence=".$_SESSION['qn']."";
+				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
 			}
 			$result = @mysqli_query($dbc, $query);
 			if(!$result)
@@ -95,15 +96,15 @@ if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummar
 		}
 		if(isset($_POST['viewsummary']))
 		{
-			header('Location: summary.php');
+			header('Location: summaryop.php');
 		}
 		
 		if(isset($_POST['summary']))
 		{
 			//summary page
-			header('Location: summary.php');
+			header('Location: summaryop.php');
 		}
-	}
+	
 	if((int)$_SESSION['qn']<(int)$_SESSION['tqn'])
 	{
 		$_SESSION['qn']=$_SESSION['qn']+1;
@@ -137,11 +138,12 @@ else if(isset($_POST['previous']))
 		{
 			if(strcmp($answer,"answered")==0)
 			{
-				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and sequence=".$_SESSION['qn']."";
+				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." ";
+				//echo $query;
 			}
 			else
 			{
-				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and sequence=".$_SESSION['qn']."";
+				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." ";
 			}
 			$result = @mysqli_query($dbc, $query);
 			if(!$result)
@@ -164,16 +166,15 @@ else if(isset($_POST['previous']))
    {
         //Final Submission
     	//header('Location: testconducter.php');
-       header('Location: testack.php');
+       header('Location: testopack.php');
     }
          
  ?>
 
    <?php 
    if(isset($_SESSION['stdname'])){
-   $sql = "select stdanswer,answered from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and sequence=".$_SESSION['qn']."";
-   //$sql = "select stdanswer,answered from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
-   echo $sql;
+   $sql = "select stdanswer,answered from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
+   //$sql = "select stdanswer,answered from StudentQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
    $r = @mysqli_query($dbc, $sql);
    $r1 = mysqli_fetch_array($r);
    if(!$r){
@@ -181,10 +182,10 @@ else if(isset($_POST['previous']))
    	echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';
    }
    //$q = "SELECT * FROM Question ORDER BY RAND() LIMIT 5";
-   $q = "select * from OpQuestion Q,StudentOpQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
+   $q = "select *from OpQuestion Q,StudentOpQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
 		and sid=".$_SESSION['stdid']."";
-   //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
 	echo $q;
+   //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
    $result = @mysqli_query($dbc, $q);
    $r=mysqli_fetch_array($result);
    $_SESSION['qn'] = $r['sequence'];
@@ -235,7 +236,7 @@ else
         }
         ?>
             </script>
-            <form action="testconducter.php" method="post">
+            <form action="testopconducter.php" method="post">
               <table border="0" width="100%" class="ntab">
                   <tr>
                       <th style="width:40%;"><h3><span id="timer" class="timerclass"></span></h3></th>
@@ -247,8 +248,7 @@ else
              
               <table border="0" width="100%" class="ntab">
                   <tr><td>&nbsp;</td></tr>
-                  <textarea cols="100" rows="8" name="stdanswer" readonly style="width:96.8%;text-align:left;margin-left:2%;margin-top:2px;font-size:120%;font-weight:bold;margin-bottom:0;color:#0000ff;padding:2px 2px 2px 2px;"></textarea>
-         
+                  <textarea cols="100" rows="8" name="answer"  style="width:96.8%;text-align:left;margin-left:2%;margin-top:2px;font-size:120%;font-weight:bold;margin-bottom:0;color:#0000ff;padding:2px 2px 2px 2px;"><?php echo htmlspecialchars_decode($r['stdanswer'],ENT_QUOTES); ?></textarea>
                   <tr><td>&nbsp;</td></tr>
                   <tr>
                       <th style="width:80%;"><h4><input type="submit" name="<?php if($final==true){ echo "viewsummary" ;}else{ echo "next";} ?>" value="<?php if($final==true){ echo "View Summary" ;}else{ echo "Next";} ?>" class="subbtn"/></h4></th>
