@@ -36,11 +36,9 @@ $sid = $_SESSION['stdid'];
 $q = "select t.*,s.cname from Test as t, Course as s,TCS TS
 		where TS.cid = s.cid and s.status = 'Active' and s.cid=t.cid and TS.tcid = t.tcid and t.cid = '$cid' 
 		and TS.sid = " . $_SESSION['stdid'] . " and t.testfrom < NOW() and
-		NOW() < t.testto  and 
+		NOW() < t.testto and t.totalquestions <= (select count(*) from Question where testid=t.testid) and 
 		NOT EXISTS(select sid,testid from StudentTest where testid=t.testid and sid=" . $_SESSION['stdid'] . ")";
 $result = @mysqli_query($dbc, $q);
-
-//echo $q;
 if(!$result){
 	echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$q . '</p>';
 }

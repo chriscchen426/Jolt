@@ -62,7 +62,7 @@ if(isset($_POST['upload'])){
 			fgets($handle);
 			
 				while(($fileop = fgetcsv($handle,1000,",")) !== false){
-				$sql = "select max(qnid) as qn from Question where testid=" . $_SESSION['testqn'] . "";
+				$sql = "select max(qnid) as qn from OpQuestion where testid=" . $_SESSION['testqn'] . "";
                 $result = @mysqli_query($dbc, $sql);
                 $r = mysqli_fetch_array($result);
                if(is_null($r['qn'])){
@@ -72,7 +72,7 @@ if(isset($_POST['upload'])){
                }
                //echo $newstd;
 					//if($newstd <= $r1['totalquestions']){
-					$v = "INSERT INTO Question values
+					$v = "INSERT INTO OpQuestion values
 					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]','$fileop[5]','$fileop[6]')";
 					$t = @mysqli_query($dbc, $v);
 					if(!$t){

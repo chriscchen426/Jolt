@@ -40,7 +40,8 @@ include 'mysqli_connect.php';
         ?>
      
       <div class="page">
-          <h3 style="color:#0000cc;text-align:center;">Your answers are Successfully Submitted. To view the Results <b><a href="viewresult.php">Click Here</a></b> </h3>
+          <h3 style="color:#0000cc;text-align:center;">Your have finished and submitted Multiple Choice part<b>
+          <h3 style="color:#0000cc;text-align:center;">Next part is open ended questions <b><a href="testopconducter.php">Click Here to start</a></b> </h3>
           <?php
                         //}
           ?>

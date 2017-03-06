@@ -63,6 +63,7 @@ if(((int)$elapsed/60)<(int)$_SESSION['duration'])
 		TIME_FORMAT(TIMEDIFF(endtime,CURRENT_TIMESTAMP),'%s') as sec from StudentTest 
 		where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
 	$result = @mysqli_query($dbc, $q);
+
 	if($rslt=mysqli_fetch_array($result))
 	{
 		echo "var hour=".$rslt['hour'].";";
@@ -96,8 +97,9 @@ else
               </table>
           <?php
 
-                        $q = "select * from StudentQuestion where testid=".$_SESSION['testid']." and sid=".$_SESSION['stdid']." order by sequence ";
+                        $q = "select * from StudentQuestion where testid=".$_SESSION['testid']." and sid=".$_SESSION['stdid']." order by qnid ";
                         $result = @mysqli_query($dbc, $q);
+                        echo $q;
                         if(mysqli_num_rows($result)==0) {
                           echo "<h3 style=\"color:#0000cc;text-align:center;\">Please Try Again.</h3>";
                         }
@@ -119,7 +121,7 @@ else
                                     echo "<tr class=\"alt\">";
                                     }
                                     else{ echo "<tr>";}
-                                    echo "<td>".$r['sequence']."</td>";
+                                    echo "<td>".$r['qnid']."</td>";
                                     if(strcmp(htmlspecialchars_decode($r['answered'],ENT_QUOTES),"unanswered")==0 ||strcmp(htmlspecialchars_decode($r['answered'],ENT_QUOTES),"review")==0)
                                     {
                                         echo "<td style=\"color:#ff0000\">".htmlspecialchars_decode($r['answered'],ENT_QUOTES)."</td>";
@@ -128,7 +130,7 @@ else
                                     {
                                         echo "<td>".htmlspecialchars_decode($r['answered'],ENT_QUOTES)."</td>";
                                     }
-                                    echo"<td><input type=\"submit\" value=\"Change ".$r['sequence']."\" name=\"change\" class=\"ssubbtn\"/></td></tr>";
+                                    echo"<td><input type=\"submit\" value=\"Change ".$r['qnid']."\" name=\"change\" class=\"ssubbtn\"/></td></tr>";
                                 }
 
                                 ?>

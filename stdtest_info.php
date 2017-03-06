@@ -59,7 +59,9 @@ if($num == 0){
 		$_SESSION['tqn'] = htmlspecialchars_decode($r1['totalquestions'], ENT_QUOTES);
 		$tq = (int)$_SESSION['tqn'];
 		$q = "SELECT * FROM Question where testid=" . $_SESSION['testid'] . " ORDER BY RAND() LIMIT $tq";
+		$q2 = "SELECT * FROM OpQuestion where testid=" . $_SESSION['testid'] . " ORDER BY RAND() LIMIT $tq";
 		$result = @mysqli_query($dbc, $q);
+		$result2 = @mysqli_query($dbc, $q2);
 		if (mysqli_num_rows($result) == 0) {
 			echo "Tests questions cannot be selected.Please Try after some time!";
 		}else{
@@ -72,6 +74,17 @@ if($num == 0){
 					$seq++;
 					$qn = $r[qnid];
 					$v = "insert into StudentQuestion values(" . $_SESSION['stdid'] . "," . $_SESSION['testid'] . ",$qn,'unanswered',NULL,$seq)";
+					$l = @mysqli_query($dbc, $v);
+					if(!$l){
+						echo  "Failure while preparing questions for you.Try again";
+						echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$v . '</p>';
+						echo "error" . mysqli_error();
+						//$error = true;
+					}
+				}
+				while ($r2 = mysqli_fetch_array($result2)){
+					$qn = $r2[qnid];
+					$v = "insert into StudentOpQuestion values(" . $_SESSION['stdid'] . "," . $_SESSION['testid'] . ",$qn,'unanswered',NULL,NULL)";
 					$l = @mysqli_query($dbc, $v);
 					if(!$l){
 						echo  "Failure while preparing questions for you.Try again";
