@@ -29,8 +29,20 @@ if (isset($_POST['cancel']) == 'Cancel') {
 if (isset($_POST['upload']) == 'Upload Question') {
 	header('Location: upload_questions.php');
 }
+
+if (isset($_POST['addOp']) == 'Add Question') {
+    header('Location: prepOpqn.php');
+}
+if (isset($_POST['uploadOp']) == 'Upload Question') {
+    header('Location: upload_Opquestions.php');
+}
+
+
 $q = "select * from Question where testid=" . $_SESSION['testqn'] . " order by qnid";
 $result = @mysqli_query($dbc, $q);
+
+$q2 = "select * from OpQuestion where testid=" . $_SESSION['testqn'] . " order by qnid";
+$result2 = @mysqli_query($dbc, $q2);
 ?>
 <html>
     <head>
@@ -56,11 +68,17 @@ if (isset($_SESSION['tcname'])) {
 ?>
                        
 <li><input type="submit" value="Cancel" name="cancel" class="subbtn"></li>
-<li><input type="submit" value="Upload Question" name="upload" class="subbtn"></li>
-<li><input type="submit" value="Add Question" name="add" class="subbtn"></li>
+<li><input type="submit" value="Upload MtQuestion" name="upload" class="subbtn"></li>
+<li><input type="submit" value="Add MtQuestion" name="add" class="subbtn"></li>
+
+
+<li><input type="submit" value="Upload OpQuestion" name="uploadOp" class="subbtn"></li>
+<li><input type="submit" value="Add OpQuestion" name="addOp" class="subbtn"></li>
+
+
 <?php
             } 
- if (mysqli_num_rows($result) == 0) {
+ if (mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0 ) {
    
     echo '</ul>';
     echo '</div>';
@@ -88,8 +106,18 @@ if (isset($_SESSION['tcname'])) {
                                    . "<td class=\"tddata\"><a title=\"Edit " . $r['qnid'] . "\"href=\"update_question.php?qid=" . $r['qnid'] . "\"><img src=\"../images/edit.png\" height=\"30\" width=\"40\" alt=\"Edit\" /></a>"
                                     . "</td></tr>";
                                  }
+
+                                  while ($r2 = mysqli_fetch_array($result2)) {
+                                     
+                                         echo "<tr>";
+                                      echo "<td><a href=delete_Opquestion.php?qid=".$r2['qnid']."><strong>DELETE</strong></a></td><td>" . htmlspecialchars_decode($r2['qnid'], ENT_QUOTES) 
+                                    . "</td><td>" . htmlspecialchars_decode($r2['question'], ENT_QUOTES) . "</td><td>" . htmlspecialchars_decode($r2['correctanswer'], ENT_QUOTES). "</td><td>" . htmlspecialchars_decode($r2['marks'], ENT_QUOTES) . "</td>"
+                                   . "<td class=\"tddata\"><a title=\"Edit " . $r['qnid'] . "\"href=\"update_Opquestion.php?qid=" . $r2['qnid'] . "\"><img src=\"../images/edit.png\" height=\"30\" width=\"40\" alt=\"Edit\" /></a>"
+                                    . "</td></tr>";
+                                 }
  ?>
                              </table>
+
                              <?php 
                              }
  
