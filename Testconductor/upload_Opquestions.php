@@ -24,14 +24,15 @@ if(isset($_POST['upload'])){
 	//if(empty($errors)){
 	if (isset($_FILES['file'])){
 		$mimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
+
 		if(in_array($_FILES['file']['type'],$mimes)){
 			$file = $_FILES['file']['tmp_name'];
 			$handle = fopen($file,"r");
 			fgets($handle);
 			while(($fileop = fgetcsv($handle,1000,",")) !== false){
-				if(!preg_match('/^\d+$/',$fileop[6])) {
+				if(!preg_match('/^\d+$/',$fileop[2])) {
 					$errors[] = 'Invalid Marks for the question: ' .$fileop[0]. '. Please Check your CSV file.';
-				}elseif(empty($fileop[0]) || empty($fileop[1]) || empty($fileop[2]) || empty($fileop[3]) || empty($fileop[4]) || empty($fileop[5])){
+				}elseif(empty($fileop[0]) || empty($fileop[1]) || empty($fileop[2])){
 					$errors[] = 'Some of the fields of the question are empty. Please Check your CSV file.';
 			}
 			}
@@ -73,7 +74,7 @@ if(isset($_POST['upload'])){
                //echo $newstd;
 					//if($newstd <= $r1['totalquestions']){
 					$v = "INSERT INTO OpQuestion values
-					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]','$fileop[5]','$fileop[6]')";
+					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]')";
 					$t = @mysqli_query($dbc, $v);
 					if(!$t){
 						echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$t . '</p>';
@@ -126,7 +127,7 @@ echo '<br>';
             <body>
 
 <h2 style = "color : #0000FF">Test Questions Upload Form</h2><br>
-<form action="upload_questions.php" method="post" enctype="multipart/form-data">
+<form action="upload_Opquestions.php" method="post" enctype="multipart/form-data">
 <table border = "1">
 <tr> <td>Test ID </td><td><input type="text" name="tid" readonly size = "34" value="<?php echo $_SESSION['testqn'] ?>" /></td></tr>
 <tr> <td>Course ID </td><td><input type="text" name="tid" readonly size = "34" value="<?php echo $_SESSION['course_id']." ".$_SESSION['course_name'] ?>" /></td></tr>
