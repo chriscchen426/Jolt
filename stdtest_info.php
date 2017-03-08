@@ -84,7 +84,7 @@ if($num == 0){
 				}
 				while ($r2 = mysqli_fetch_array($result2)){
 					$qn = $r2[qnid];
-					$v = "insert into StudentOpQuestion values(" . $_SESSION['stdid'] . "," . $_SESSION['testid'] . ",$qn,'unanswered',NULL,NULL)";
+					$v = "insert into StudentOpQuestion values(" . $_SESSION['stdid'] . "," . $_SESSION['testid'] . ",$qn,'unanswered',NULL,0,NULL)";
 					$l = @mysqli_query($dbc, $v);
 					if(!$l){
 						echo  "Failure while preparing questions for you.Try again";

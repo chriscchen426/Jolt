@@ -193,7 +193,7 @@ include 'mysqli_connect.php';
                                         }
 
                                         //for open ended question:
-                                        $op = "select q.qnid as questionid,q.question as quest,q.correctanswer as ca,sq.answered as status,sq.stdanswer as sa ,sq.comments as c
+                                        $op = "select q.qnid as questionid,q.question as quest,q.correctanswer as ca,sq.answered as status,sq.stdanswer as sa ,sq.comments as c, sq.grade as g
                                                  from StudentOpQuestion as sq,OpQuestion as q 
                                                 where q.qnid=sq.qnid and sq.testid=q.testid and 
                                                sq.testid=".$_REQUEST['details']." and sq.sid=".$_SESSION['stdid']." order by q.qnid";
@@ -211,6 +211,7 @@ include 'mysqli_connect.php';
                             
                             <th>Correct Answer</th>
                             <th>Your Answer</th>
+                            <th>Your Grade</th>
                             <th>Comments</th>
                             <th>&nbsp;</th>
                         </tr>
@@ -226,6 +227,7 @@ include 'mysqli_connect.php';
                             
                             <td><?php echo htmlspecialchars_decode($rop['ca'],ENT_QUOTES); ?></td>
                             <td><?php echo htmlspecialchars_decode($rop['sa'],ENT_QUOTES); ?></td>
+                             <td><?php echo htmlspecialchars_decode($rop['g'],ENT_QUOTES); ?></td>
                             <td><?php echo htmlspecialchars_decode($rop['c'],ENT_QUOTES); ?></td>
                             
                         </tr>

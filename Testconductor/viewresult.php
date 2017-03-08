@@ -218,7 +218,8 @@ printpage.focus();
                             
                             <th>Correct Answer</th>
                             <th>Student's Answer</th>
-                            <th>Comments</th>
+                            <th>Comment</th>
+                            <th>Grade</th>
                             <th>&nbsp;</th>
                         </tr>
                                         <?php
