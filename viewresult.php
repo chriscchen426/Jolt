@@ -191,6 +191,50 @@ include 'mysqli_connect.php';
                                             }
 
                                         }
+
+                                        //for open ended question:
+                                        $op = "select q.qnid as questionid,q.question as quest,q.correctanswer as ca,sq.answered as status,sq.stdanswer as sa ,sq.comments as c
+                                                 from StudentOpQuestion as sq,OpQuestion as q 
+                                                where q.qnid=sq.qnid and sq.testid=q.testid and 
+                                               sq.testid=".$_REQUEST['details']." and sq.sid=".$_SESSION['stdid']." order by q.qnid";
+                                            //echo $op;
+                                $resultop = @mysqli_query($dbc, $op);
+
+                                if(mysqli_num_rows($resultop)==0) {
+                                    echo"<h3 style=\"color:#0000cc;text-align:center;\">1.Sorry because of some problems Individual questions Cannot be displayed.</h3>";
+                                }
+                                else {
+                                    ?>
+                    <table cellpadding="30" cellspacing="10" class="datatable">
+                        <tr>
+                            <th>Q. No</th>
+                            
+                            <th>Correct Answer</th>
+                            <th>Your Answer</th>
+                            <th>Comments</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                                        <?php
+                                        while($rop=mysqli_fetch_array($resultop)) {
+
+                                       
+
+                                        
+                                                ?>
+                        <tr>
+                            <td><?php echo $rop['questionid']; ?></td>
+                            
+                            <td><?php echo htmlspecialchars_decode($rop['ca'],ENT_QUOTES); ?></td>
+                            <td><?php echo htmlspecialchars_decode($rop['sa'],ENT_QUOTES); ?></td>
+                            <td><?php echo htmlspecialchars_decode($rop['c'],ENT_QUOTES); ?></td>
+                            
+                        </tr>
+                            <?php
+                                               
+                                            }
+
+                                        }
+
                                     }
                                     else {
                                         echo"<h3 style=\"color:#0000cc;text-align:center;\">Something went wrong. Please logout and Try again.</h3>".mysql_error();
