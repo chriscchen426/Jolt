@@ -54,13 +54,157 @@ $r = mysqli_fetch_array($result);
 		  */
 
 		  
-if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummary']))
+// if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummary']))
+// {
+	
+// 	//next question
+	
+// 	$answer='unanswered';
+
+// 		//echo $_SESSION['endtime'];
+// 		if(isset($_POST['markreview']))
+// 		{
+// 			$answer='review';
+// 		}
+// 		else if(isset($_POST['answer']))
+// 		{
+// 			$answer='answered';
+// 		}
+// 		else
+// 		{
+// 			$answer='unanswered';
+// 		}
+		
+// 		if(strcmp($answer,"unanswered")!=0)
+// 		{
+// 			if(strcmp($answer,"answered")==0)
+// 			{
+// 				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid =  ".$_SESSION['qn']."";
+// 				echo $query;
+// 			}
+// 			else
+// 			{
+// 				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid =  ".$_SESSION['qn']."";
+// 			}
+// 			$result = @mysqli_query($dbc, $query);
+// 			if(!$result)
+// 			{
+// 				echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$query . '</p>';
+// 				// to do
+// 				echo 'Your previous answer is not updated.Please answer once again';
+// 			}
+			
+// 		}
+// 		if(isset($_POST['viewsummary']))
+// 		{
+// 			header('Location: summaryop.php');
+// 		}
+		
+// 		if(isset($_POST['summary']))
+// 		{
+// 			//summary page
+// 			header('Location: summaryop.php');
+// 		}
+	
+// 	if((int)$_SESSION['qn']<(int)$_SESSION['tqn'])
+// 	{
+// 		$_SESSION['qn'] = $_SESSION['qn']+1;
+// 		echo $_SESSION['qn'];
+		 
+// 	}
+// 	if((int)$_SESSION['qn']==(int)$_SESSION['tqn'])
+// 	{
+// 		$final=true;
+// 	}
+
+// }
+// else if(isset($_POST['previous']))
+// {
+// 	// Perform the changes for current question
+// 	$answer='unanswered';
+// 	// if($b < $_SESSION['endtime'])
+// 	// {
+// 		if(isset($_POST['markreview']))
+// 		{
+// 			$answer='review';
+// 		}
+// 		else if(isset($_POST['answer']))
+// 		{
+// 			$answer='answered';
+// 		}
+// 		else
+// 		{
+// 			$answer='unanswered';
+// 		}
+// 		if(strcmp($answer,"unanswered")!=0)
+// 		{
+// 			if(strcmp($answer,"answered")==0)
+// 			{
+// 				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid =  ".$_SESSION['qn']."";
+// 				echo $query;
+// 			}
+// 			else
+// 			{
+// 				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid =  ".$_SESSION['qn']."";
+// 				echo $query;
+// 			}
+// 			$result = @mysqli_query($dbc, $query);
+// 			if(!$result)
+// 			{
+// 				echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$query . '</p>';
+// 				// to do
+// 				echo 'Your previous answer is not updated.Please answer once again';
+// 			}
+			
+// 		}
+// 	//}
+// 	//previous question
+// 	if((int)$_SESSION['qn']>1)
+// 	{
+// 		$_SESSION['qn']=$_SESSION['qn']-1;
+// 	}
+
+// }
+//  if(isset($_REQUEST['fs']))
+//    {
+//         //Final Submission
+//     	//header('Location: testconducter.php');
+//        header('Location: testopack.php');
+//     }
+         
+//    if(isset($_SESSION['stdname'])){
+//    //$sql = "select stdanswer,answered from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
+//    $sql = "select stdanswer,answered from StudentQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+//    $r = @mysqli_query($dbc, $sql);
+//    $r1 = mysqli_fetch_array($r);
+//    if(!$r){
+   
+//    	echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';
+//    }
+//    //$q = "SELECT * FROM Question ORDER BY RAND() LIMIT 5";
+//    $q = "select *from OpQuestion Q,StudentOpQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
+// 		and sid=".$_SESSION['stdid']."";
+// 	echo $q;
+// 	$qq = "select max(Q.qnid) as max from OpQuestion Q,StudentOpQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
+// 		and sid=".$_SESSION['stdid']."";
+// 	//echo $qq;
+// 	$resultqq = @mysqli_query($dbc, $qq);
+// 	$rqq = mysqli_fetch_array($resultqq);
+//    //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+//    $result = @mysqli_query($dbc, $q);
+//    $r=mysqli_fetch_array($result);
+//    $_SESSION['qn'] = $r['qnid'];
+//    $_SESSION['tqn'] = $rqq['max'];
+   
+//    }
+	if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummary']))
 {
 	
 	//next question
 	
 	$answer='unanswered';
-
+	// if($b < $_SESSION['endtime'])
+	// {
 		//echo $_SESSION['endtime'];
 		if(isset($_POST['markreview']))
 		{
@@ -74,16 +218,15 @@ if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummar
 		{
 			$answer='unanswered';
 		}
-		echo $answer;
 		if(strcmp($answer,"unanswered")!=0)
 		{
 			if(strcmp($answer,"answered")==0)
 			{
-				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
+				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
 			}
 			else
 			{
-				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
+				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
 			}
 			$result = @mysqli_query($dbc, $query);
 			if(!$result)
@@ -104,10 +247,11 @@ if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummar
 			//summary page
 			header('Location: summaryop.php');
 		}
-	
+	//}
 	if((int)$_SESSION['qn']<(int)$_SESSION['tqn'])
 	{
 		$_SESSION['qn']=$_SESSION['qn']+1;
+		echo "~~~";
 		 
 	}
 	if((int)$_SESSION['qn']==(int)$_SESSION['tqn'])
@@ -120,8 +264,8 @@ else if(isset($_POST['previous']))
 {
 	// Perform the changes for current question
 	$answer='unanswered';
-	if($b < $_SESSION['endtime'])
-	{
+	// if($b < $_SESSION['endtime'])
+	// {
 		if(isset($_POST['markreview']))
 		{
 			$answer='review';
@@ -138,12 +282,11 @@ else if(isset($_POST['previous']))
 		{
 			if(strcmp($answer,"answered")==0)
 			{
-				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." ";
-				//echo $query;
+				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
 			}
 			else
 			{
-				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." ";
+				$query="update StudentOpQuestion set answered='review',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
 			}
 			$result = @mysqli_query($dbc, $query);
 			if(!$result)
@@ -154,7 +297,7 @@ else if(isset($_POST['previous']))
 			}
 			
 		}
-	}
+	//}
 	//previous question
 	if((int)$_SESSION['qn']>1)
 	{
@@ -173,25 +316,28 @@ else if(isset($_POST['previous']))
 
    <?php 
    if(isset($_SESSION['stdname'])){
-   $sql = "select stdanswer,answered from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
-   //$sql = "select stdanswer,answered from StudentQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+   $sql = "select stdanswer,answered from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
    $r = @mysqli_query($dbc, $sql);
    $r1 = mysqli_fetch_array($r);
    if(!$r){
    
    	echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';
    }
-   //$q = "SELECT * FROM Question ORDER BY RAND() LIMIT 5";
-   $q = "select *from OpQuestion Q,StudentOpQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
-		and sid=".$_SESSION['stdid']."";
-	echo $q;
-   //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+   $q = "select * from OpQuestion where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+   echo $q;
    $result = @mysqli_query($dbc, $q);
    $r=mysqli_fetch_array($result);
-   $_SESSION['qn'] = $r['sequence'];
-   $_SESSION['qn1'] = $r['qnid'];
-   
    }
+
+	$qq = "select max(Q.qnid) as max from OpQuestion Q,StudentOpQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
+		and sid=".$_SESSION['stdid']."";
+	//echo $qq;
+	$resultqq = @mysqli_query($dbc, $qq);
+	$rqq = mysqli_fetch_array($resultqq);
+   //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+   
+   $_SESSION['tqn'] = $rqq['max'];
+
    ?>
         
           <html>
@@ -240,7 +386,7 @@ else
               <table border="0" width="100%" class="ntab">
                   <tr>
                       <th style="width:40%;"><h3><span id="timer" class="timerclass"></span></h3></th>
-                      <th style="width:40%;"><h4 style="color: #af0a36;">Question No: <?php echo $_SESSION['qn1']; ?> </h4></th>
+                      <th style="width:40%;"><h4 style="color: #af0a36;">Question No: <?php echo $_SESSION['qn']; ?> </h4></th>
                       <th style="width:20%;"><h4 style="color: #af0a36;"><input type="checkbox" name="markreview" value="mark"> Mark for Review</input></h4></th>
                   </tr>
               </table>

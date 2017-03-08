@@ -59,7 +59,7 @@ if($num == 0){
 		$_SESSION['tqn'] = htmlspecialchars_decode($r1['totalquestions'], ENT_QUOTES);
 		$tq = (int)$_SESSION['tqn'];
 		$q = "SELECT * FROM Question where testid=" . $_SESSION['testid'] . " ORDER BY RAND() LIMIT $tq";
-		$q2 = "SELECT * FROM OpQuestion where testid=" . $_SESSION['testid'] . " ORDER BY RAND() LIMIT $tq";
+		$q2 = "SELECT * FROM OpQuestion where testid=" . $_SESSION['testid'] . "";
 		$result = @mysqli_query($dbc, $q);
 		$result2 = @mysqli_query($dbc, $q2);
 		if (mysqli_num_rows($result) == 0) {
