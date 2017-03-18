@@ -99,7 +99,7 @@ else
 
                         $q = "select * from StudentOpQuestion where testid=".$_SESSION['testid']." and sid=".$_SESSION['stdid']." order by qnid ";
                         $result = @mysqli_query($dbc, $q);
-                        echo $q;
+                        //echo $q;
                         if(mysqli_num_rows($result)==0) {
                           echo "<h3 style=\"color:#0000cc;text-align:center;\">Please Try Again.</h3>";
                         }

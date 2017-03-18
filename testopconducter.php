@@ -223,6 +223,7 @@ $r = mysqli_fetch_array($result);
 			if(strcmp($answer,"answered")==0)
 			{
 				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
+				echo $query;
 			}
 			else
 			{
@@ -251,7 +252,7 @@ $r = mysqli_fetch_array($result);
 	if((int)$_SESSION['qn']<(int)$_SESSION['tqn'])
 	{
 		$_SESSION['qn']=$_SESSION['qn']+1;
-		echo "~~~";
+		//echo "~~~";
 		 
 	}
 	if((int)$_SESSION['qn']==(int)$_SESSION['tqn'])
@@ -263,7 +264,7 @@ $r = mysqli_fetch_array($result);
 else if(isset($_POST['previous']))
 {
 	// Perform the changes for current question
-	$answer='unanswered';
+	//$answer='unanswered';
 	// if($b < $_SESSION['endtime'])
 	// {
 		if(isset($_POST['markreview']))
@@ -324,8 +325,9 @@ else if(isset($_POST['previous']))
    	echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';
    }
    $q = "select * from OpQuestion where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
-   echo $q;
+   //echo $q;
    $result = @mysqli_query($dbc, $q);
+   //echo $q;
    $r=mysqli_fetch_array($result);
    }
 
@@ -336,6 +338,11 @@ else if(isset($_POST['previous']))
 	$rqq = mysqli_fetch_array($resultqq);
    //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
    
+	$qqq = "select * from StudentOpQuestion where testid=".$_SESSION['testid']." and sid=".$_SESSION['stdid']." and qnid=".$_SESSION['qn']."";
+	//echo $qqq;
+	$resultqqq = @mysqli_query($dbc, $qqq);
+	$rqqq = mysqli_fetch_array($resultqqq);
+
    $_SESSION['tqn'] = $rqq['max'];
 
    ?>
@@ -394,7 +401,7 @@ else
              
               <table border="0" width="100%" class="ntab">
                   <tr><td>&nbsp;</td></tr>
-                  <textarea cols="100" rows="8" name="answer"  style="width:96.8%;text-align:left;margin-left:2%;margin-top:2px;font-size:120%;font-weight:bold;margin-bottom:0;color:#0000ff;padding:2px 2px 2px 2px;"><?php echo htmlspecialchars_decode($r['stdanswer'],ENT_QUOTES); ?></textarea>
+                  <textarea cols="100" rows="8" name="answer"  style="width:96.8%;text-align:left;margin-left:2%;margin-top:2px;font-size:120%;font-weight:bold;margin-bottom:0;color:#0000ff;padding:2px 2px 2px 2px;"><?php echo htmlspecialchars_decode($rqqq['stdanswer'],ENT_QUOTES); ?></textarea>
                   <tr><td>&nbsp;</td></tr>
                   <tr>
                       <th style="width:80%;"><h4><input type="submit" name="<?php if($final==true){ echo "viewsummary" ;}else{ echo "next";} ?>" value="<?php if($final==true){ echo "View Summary" ;}else{ echo "Next";} ?>" class="subbtn"/></h4></th>

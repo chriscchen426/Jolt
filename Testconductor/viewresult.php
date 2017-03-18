@@ -200,7 +200,7 @@ printpage.focus();
                                         }
 
                                         //for open ended questions result
-                                        $op = "select q.qnid as questionid,q.question as quest,q.correctanswer as ca,sq.answered as status,sq.stdanswer as sa ,sq.comments as c
+                                        $op = "select q.qnid as questionid,q.question as quest,q.correctanswer as ca,sq.answered as status,sq.stdanswer as sa ,sq.comments as c, sq.grade as g
                                                  from StudentOpQuestion as sq,OpQuestion as q 
                                                 where q.qnid=sq.qnid and sq.testid=q.testid and 
                                                sq.testid=".$_REQUEST['details']." and sq.sid=".$_REQUEST['stdid']." order by q.qnid";
@@ -231,10 +231,11 @@ printpage.focus();
                                                 ?>
                         <tr>
                             <td><?php echo $rop['questionid']; ?></td>
-                            
+                            <?php $_SESSION['questionid'] = $rop['questionid']; ?>
                             <td><?php echo htmlspecialchars_decode($rop['ca'],ENT_QUOTES); ?></td>
                             <td><?php echo htmlspecialchars_decode($rop['sa'],ENT_QUOTES); ?></td>
-                            <td><?php echo htmlspecialchars_decode($rop['c'],ENT_QUOTES); ?></td>
+                            <td><a href="grade.php"><?php echo htmlspecialchars_decode($rop['c'],ENT_QUOTES); ?></a></td>
+                            <td><a href="grade.php"><?php echo htmlspecialchars_decode($rop['g'],ENT_QUOTES); ?></a></td>
                             
                         </tr>
                             <?php
