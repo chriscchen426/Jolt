@@ -234,8 +234,8 @@ printpage.focus();
                             <?php $_SESSION['questionid'] = $rop['questionid']; ?>
                             <td><?php echo htmlspecialchars_decode($rop['ca'],ENT_QUOTES); ?></td>
                             <td><?php echo htmlspecialchars_decode($rop['sa'],ENT_QUOTES); ?></td>
-                            <td><a href="grade.php"><?php echo htmlspecialchars_decode($rop['c'],ENT_QUOTES); ?></a></td>
-                            <td><a href="grade.php"><?php echo htmlspecialchars_decode($rop['g'],ENT_QUOTES); ?></a></td>
+                            <td><?php echo htmlspecialchars_decode($rop['c'],ENT_QUOTES); ?></td>
+                            <td><?php echo htmlspecialchars_decode($rop['g'],ENT_QUOTES); ?></td>
                             
                         </tr>
                             <?php

@@ -187,6 +187,7 @@ echo "</TABLE>\n";
                             <th>Result(%)</th>
                             <th>Details</th>
 
+
                         </tr>
                                         <?php
                                         while($r1=mysqli_fetch_array($result1)) {
@@ -240,6 +241,7 @@ echo "</TABLE>\n";
                             <th>Course Name</th>
                             <th>Attempted Students</th>
                             <th>Details</th>
+                            <th>Grades</th>
                         </tr>
             <?php
                                     while($r=mysqli_fetch_array($result)) {
@@ -250,7 +252,8 @@ echo "</TABLE>\n";
                                         else { echo "<tr>";}
                                         echo "<td>".htmlspecialchars_decode($r['testname'],ENT_QUOTES)."</td><td>".$r['fromdate']." To ".$r['todate']." PM </td><td>".htmlspecialchars_decode($r['cid'],ENT_QUOTES)."</td><td>"
                                             .htmlspecialchars_decode($r['cname'],ENT_QUOTES)."</td><td>".$r['attemptedstudents']."</td>"
-                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"rsltmng.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
+                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"rsltmng.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>"
+                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
                                     }
                                     ?>
                     </table>

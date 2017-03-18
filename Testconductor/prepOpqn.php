@@ -50,13 +50,13 @@ $a = $_POST['optiona'];
 $marks = $_POST['marks'];
 
 $tid = (int)$_SESSION['testqn'];
-	$sql = "Insert into OpQuestion values($tid,$newstd,'$qs','$a',$marks)";   //need to modify
+	$sql = "Insert into OpQuestion values($tid,$newstd,'$qs','$a',$marks,".$_SESSION['tcid'].")";  //need to modify
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
 	$success[] = 'New question has been created. <a href="prepqn.php">Add More Question</a>';
 		//exit();
-		
+		header('Location: exam_question_display.php');
 		
 	}else{
 		echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';

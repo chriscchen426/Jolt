@@ -73,7 +73,7 @@ if(isset($_POST['upload'])){
                //echo $newstd;
 					//if($newstd <= $r1['totalquestions']){
 					$v = "INSERT INTO Question values
-					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]','$fileop[5]','$fileop[6]')";
+					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]','$fileop[5]','$fileop[6]',".$_SESSION['tcid'].")"; 
 					$t = @mysqli_query($dbc, $v);
 					if(!$t){
 						echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$t . '</p>';

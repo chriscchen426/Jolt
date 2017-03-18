@@ -54,13 +54,13 @@ $d = $_POST['optiond'];
 $marks = $_POST['marks'];
 $ans = $_POST['correctans'];
 $tid = (int)$_SESSION['testqn'];
-	$sql = "Insert into Question values($tid,$newstd,'$qs','$a','$b','$c','$d','$ans',$marks)";
+	$sql = "Insert into Question values($tid,$newstd,'$qs','$a','$b','$c','$d','$ans',$marks,".$_SESSION['tcid'].")";
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
 	$success[] = 'New question has been created. <a href="prepqn.php">Add More Question</a>';
 		//exit();
-		
+		header('Location: exam_question_display.php');
 		
 	}else{
 		echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';

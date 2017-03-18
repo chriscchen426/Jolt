@@ -1,9 +1,5 @@
-<?php
 
-//USER Story: Client Requested to see exam details for each student for each student.
-//USER Story: Print the exam details for each student for each exam.
-//Version: OES1.2
-//Developed by: DIPAKKUMAR PATEL
+<?php
 
 session_start();
 if(!isset($_SESSION['tcname'])){
@@ -11,85 +7,183 @@ if(!isset($_SESSION['tcname'])){
 }
 //include 'header.html';
 include '../mysqli_connect.php';
-if(isset($_REQUEST['back'])) {
-    //redirect to View Result
+echo '<pre><h2 align = "right"><a href="home.php"><img src="home.jpg" width="50" height="50"></a> <a href="logout.php"><img src="logout.jpg" width="50" height="50"></a></h2></pre> ';
+//echo '<h2 align = "right" style="font-family:tempus sans itc"><a href="home.php">Home</a> <a href="logout.php">Logout</a></h2>';
+echo '<h4 align = "right" style = "color : #0000FF"> Welcome, Professor ' . $_SESSION['tcname'] . '<br></h4>';
+  if(isset($_REQUEST['back'])) {
+    /************************** Step 2 - Case 3 *************************/
+            //redirect to Result Management Section
+                header('Location: rsltmng.php');
 
-    header('Location: rsltmng.php');
+            }
 
-}
 ?>
-<div id="container">
+<html>
+    <head>
+        <title>OES-Manage Results</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="../oes.css"/>
+
+    </head>
+    <body>
+        <?php
+
+        
+        ?>
+        <div id="container">
             <div class="header">
                 <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="../images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Online Examination System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
             </div>
-            <form id="summary" action="viewresult.php" method="post">
-            <div class="menubar">
+            <form name="rsltmng" action="rsltmng.php" method="post">
+                <div class="menubar">
+
+
                     <ul id="menu">
-            <?php 
-// Navigations
-if(isset($_REQUEST['details']) && isset($_REQUEST['stdid'])) {
-    ?>
-   <li><input type="submit" value="Back" name="back" class="subbtn" title="Manage Results"></li>
-   <li><input type="button" value="Print Preview" class="subbtn" onClick="printPage(printsection.innerHTML)"></li>
-  </ul>
-    </div>
-    <div id="printsection"> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-    <head>
-        <title>OES-View Result</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE"/>
-        <meta http-equiv="PRAGMA" content="NO-CACHE"/>
-        <meta name="ROBOTS" content="NONE"/>
+                        <?php if(isset($_SESSION['tcname'])) {
+                        // Navigations
 
-        <link rel="stylesheet" type="text/css" href="../oes.css"/>
-        <script type="text/javascript" src="../validate.js" ></script>
-        <script language="javascript">
-function printPage(printContent) {
-var display_setting="toolbar=yes,menubar=yes,";
-display_setting+="scrollbars=yes,width=650, height=600, left=100, top=25";
-
-
-var printpage=window.open("","",display_setting);
-printpage.document.open();
-printpage.document.write('<html><head><title>Exam Report</title><link rel="stylesheet" type="text/css" href="../oes.css" /></head>');
-printpage.document.write('<body onLoad="self.print()" align="center">'+ printContent +'</body></html>');
-printpage.document.close();
-printpage.focus();
-}
-</script> 
-    </head>
-    <body >
-       
-       
-       
-                  <?php
-                        }
-                        ?>
-
-                   
+                            ?>
+                        
+                            <?php  if(isset($_REQUEST['testid'])) { ?>
+                        <li><input type="submit" value="Back" name="back" class="subbtn" title="Manage Results"/></li>
+                            <?php }else { ?>
+                        
+                            <?php } ?>
+                    </ul>
+                </div>
                 <div class="page">
-
                         <?php
-
-                        if(isset($_REQUEST['details'])) {
-                            $q = "select s.sname,t.testname,sub.cname,sub.cid,DATE_FORMAT(st.starttime,'%d %M %Y %H:%i:%s') as stime,
-                                                  TIMEDIFF(st.endtime,st.starttime) as dur,(select sum(marks) from 
-                                                   Question where testid=".$_REQUEST['details'].") as tm,IFNULL((select sum(q.marks) from 
-                                                  StudentQuestion as sq, Question as q where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' 
-                                                  and sq.stdanswer=q.correctanswer and sq.sid=".$_REQUEST['stdid']." 
-                                                  and sq.testid=".$_REQUEST['details']."),0) as om from Student as s,Test as t, Course as sub,StudentTest as st 
-                                                    where s.sid=st.sid and st.testid=t.testid and 
-                                                  t.cid=sub.cid and st.sid=".$_REQUEST['stdid']." 
-                                                    and st.testid=".$_REQUEST['details']."";
+                        if(isset($_REQUEST['testid'])) {
+                    /************************** Step 3 - Case 2 *************************/
+                        // Displays the Existing Test Results in detail, If any.
+                            $q = "select t.testname,DATE_FORMAT(t.testfrom,'%d %M %Y') as fromdate,
+        DATE_FORMAT(t.testto,'%d %M %Y %H:%i:%S') as todate,sub.cid,sub.cname,IFNULL((select sum(marks) from Question where testid=".$_REQUEST['testid']."),0) as maxmarks 
+        from Test as t, Course as sub where sub.cid=t.cid and t.testid=".$_REQUEST['testid']."" ;
                             $result = @mysqli_query($dbc, $q);
                             if(mysqli_num_rows($result)!=0) {
 
                                 $r=mysqli_fetch_array($result);
                                 ?>
- 
+                    
+    
+     <table cellpadding="20" cellspacing="30" border="0" style="background:#ffffff url(../images/page.gif);text-align:left;line-height:20px;">
+                        <tr><td colspan="2"><hr style="color:#ff0000;border-width:2px;"/></td></tr>
+                        <tr>
+                            <td colspan="2"><h3 style="color:#0000cc;text-align:center;">Attempted Students</h3></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" ><hr style="color:#ff0000;border-width:4px;"/></td>
+                        </tr>
+        </table>
 
-                                               
-              
+                                <?php
+/*
+                                $t = "select s.sname,s.email,IFNULL((select sum(q.marks) from 
+        StudentQuestion as sq,Question as q where q.qnid=sq.qnid and sq.testid=".$_REQUEST['testid']." and 
+        sq.sid=st.sid and sq.stdanswer=q.correctanswer),0) as om from StudentTest as st, Student as s where 
+        s.sid=st.sid and st.testid=".$_REQUEST['testid']."";
+        */
+                           $t = "select s.sid,s.sname,s.email,IFNULL((select sum(q.marks) from StudentQuestion as sq, Question as q 
+                         where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' and 
+                            sq.stdanswer=q.correctanswer and sq.sid=st.sid and 
+                   sq.testid=".$_REQUEST['testid']." order by sq.testid),0) as om from StudentTest as st, Student as s where 
+        s.sid=st.sid and st.testid=".$_REQUEST['testid']."";
+                                $result1 = @mysqli_query($dbc, $t);
+
+                                if(mysqli_num_rows($result1)==0) {
+                                    echo"<h3 style=\"color:#0000cc;text-align:center;\">No Students Yet Attempted this Test!</h3>";
+                                }
+                                else {
+                                    ?>
+                    <table cellpadding="30" cellspacing="10" class="datatable">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Email-ID</th>
+                            <th>Obtained Marks</th>
+                            <th>Result(%)</th>
+                            <th>Details</th>
+
+
+                        </tr>
+                                        <?php
+                                        while($r1=mysqli_fetch_array($result1)) {
+
+                                            ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars_decode($r1['sname'],ENT_QUOTES); ?></td>
+                            <td><?php echo htmlspecialchars_decode($r1['email'],ENT_QUOTES); ?></td>
+                            <td><?php echo $r1['om']; ?></td>
+                            <td><?php echo round((($r1['om']/$r['maxmarks'])*100),1)." %"; ?></td>
+                          <?php echo "<td class=\"tddata\"><a title=\"Details\" href=\"graderesult.php?details=".$_REQUEST['testid']."&stdid=".$r1['sid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>";?>
+
+
+                        </tr>
+                                        <?php
+                                        
+                                        }
+
+                                    }
+                                }
+                                else {
+                                    echo"<h3 style=\"color:#0000cc;text-align:center;\">Something went wrong. Please logout and Try again.</h3>";
+                                }
+                                ?>
+                    </table>
+
+
+                        <?php
+
+                        }
+                        else {
+
+                        /************************** Step 3 - Case 2 *************************/
+                        // Defualt Mode: Displays the Existing Test Results, If any.
+                            $v = "select t.testid,t.testname,DATE_FORMAT(t.testfrom,'%d %M %Y') as fromdate,
+        DATE_FORMAT(t.testto,'%d %M %Y %H:%i:%S') as todate,sub.cid,sub.cname,(select count(sid) from StudentTest 
+        where testid=t.testid) as attemptedstudents from Test as t, Course as sub where sub.cid=t.cid and sub.status = 'Active' and t.tcid=".$_SESSION['tcid']."";
+                            $result = @mysqli_query($dbc, $v);
+                            if(mysqli_num_rows($result)==0) {
+                                echo "<h3 style=\"color:#0000cc;text-align:center;\">No Tests Yet...!</h3>";
+                            }
+                            else {
+                                $i=0;
+
+                                ?>
+                    <table cellpadding="30" cellspacing="10" class="datatable">
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Validity</th>
+                            <th>Course ID</th>
+                            <th>Course Name</th>
+                            <th>Attempted Students</th>
+                            <th>Details</th>
+                            <th>Grades</th>
+                        </tr>
+            <?php
+                                    while($r=mysqli_fetch_array($result)) {
+                                        $i=$i+1;
+                                        if($i%2==0) {
+                                            echo "<tr class=\"alt\">";
+                                        }
+                                        else { echo "<tr>";}
+                                        echo "<td>".htmlspecialchars_decode($r['testname'],ENT_QUOTES)."</td><td>".$r['fromdate']." To ".$r['todate']." PM </td><td>".htmlspecialchars_decode($r['cid'],ENT_QUOTES)."</td><td>"
+                                            .htmlspecialchars_decode($r['cname'],ENT_QUOTES)."</td><td>".$r['attemptedstudents']."</td>"
+                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>"
+                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
+                                    }
+                                    ?>
+                    </table>
+        <?php
+                            }
+                        }
+                        
+                    }
+
+                    ?>
+
+                </div>
+            </form>
+           
+      </div>
+  </body>
+</html>

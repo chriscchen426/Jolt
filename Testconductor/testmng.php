@@ -24,7 +24,9 @@ if (empty($_POST['testname']) || empty($_POST['testdesc']) || empty($_POST['tota
 	$totime = $_POST['testto'] . " 23:59:59";
 	$desc = $_POST['testdesc'];
 	$tqn = $_POST['totalqn'];
+  $tqn2 = $_POST['totalqn2'];
 	$duration = $_POST['duration'];
+  $duration2 = $_POST['duration2'];
 	$tcode = $_POST['testcode'];
 	//$cid = $_POST['cid'];
 	$tname = $_POST['testname'];
@@ -41,6 +43,8 @@ if(empty($errors)){
 	$rcid = $pieces[1];
 	$data = explode('-', $rcid ,2);
 	$cid = $pieces[0]."-".$data[0];
+
+
 	
 	$q = "select max(testid) as tst from Test";
 	$r = @mysqli_query($dbc, $q);
@@ -50,7 +54,8 @@ if(empty($errors)){
 	}else{
 		$newstd=$row['tst'] + 1;
 	}
-	$sql = "Insert into Test values($newstd,'$cid','$tname','$desc',curDate(),curTime(),'$fromtime','$totime',$duration,$tqn,0,'$tcode',$tcid)";
+	$sql = "Insert into Test values($newstd,'$cid','$tname','$desc',curDate(),curTime(),'$fromtime','$totime',$duration,$duration2,$tqn,$tqn2,0,'$tcode',$tcid)";
+  //echo $sql;
 	$result = @mysqli_query($dbc, $sql);
 	if(!$result){
 		if(mysqli_errno ($dbc) == 1062) //duplicate value
@@ -159,10 +164,17 @@ echo '<br>';
                             <td style = "color:#ff0000"><b>Describe here:</b><br/>What the test is all about?</div></td>
                         </tr>
                         <tr>
-                            <td><b>Total Questions</b></td><td><input type="text" name="totalqn" value="<?php if (isset($_POST['totalqn'])) echo $_POST['totalqn']; ?>" size="16" onkeyup="isnum(this)" /></td>
+                            <td><b>Total Multi-Questions</b></td><td><input type="text" name="totalqn" value="<?php if (isset($_POST['totalqn'])) echo $_POST['totalqn']; ?>" size="16" onkeyup="isnum(this)" /></td>
 
                         </tr>
-                        <tr><td><b>Duration(Mins)</b></td><td><input type="text" name="duration" value="<?php if (isset($_POST['duration'])) echo $_POST['duration']; ?>" size="16" onkeyup="isnum(this)" /></td>
+                        <tr>
+                            <td><b>Total Open-ended Questions</b></td><td><input type="text" name="totalqn2" value="<?php if (isset($_POST['totalqn2'])) echo $_POST['totalqn2']; ?>" size="16" onkeyup="isnum(this)" /></td>
+
+                        </tr>
+                        <tr><td><b>Multi-Questions Duration(Mins)</b></td><td><input type="text" name="duration" value="<?php if (isset($_POST['duration'])) echo $_POST['duration']; ?>" size="16" onkeyup="isnum(this)" /></td>
+                            </tr>
+                        <tr>
+                        <tr><td><b>Open-ended Questions Duration(Mins)</b></td><td><input type="text" name="duration2" value="<?php if (isset($_POST['duration2'])) echo $_POST['duration2']; ?>" size="16" onkeyup="isnum(this)" /></td>
                             </tr>
                         <tr>
                             <td><b>Test From</b> </td><td><input id="testfrom" type="text" name="testfrom" value="<?php if (isset($_POST['testfrom'])) echo $_POST['testfrom']; ?>" size="16" readonly /></td>
@@ -260,10 +272,16 @@ exit();
                             <td style = "color:#ff0000"><b>Describe here:</b><br/>What the test is all about?</div></td>
                         </tr>
                         <tr>
-                            <td><b>Total Questions</b></td><td><input type="text" name="totalqn" value="" size="16" onkeyup="isnum(this)" /></td>
+                            <td><b>Total Multi-Questions</b></td><td><input type="text" name="totalqn" value="" size="16" onkeyup="isnum(this)" /></td>
 
                         </tr>
-                        <tr><td><b>Duration(Mins)</b></td><td><input type="text" name="duration" value="" size="16" onkeyup="isnum(this)" /></td>
+                        <tr>
+                            <td><b>Total Open-ended Questions</b></td><td><input type="text" name="totalqn2" value="" size="16" onkeyup="isnum(this)" /></td>
+
+                        </tr>
+                        <tr><td><b>Multi-Questions Duration(Mins)</b></td><td><input type="text" name="duration" value="" size="16" onkeyup="isnum(this)" /></td>
+                            </tr>
+                        <tr><td><b>Open-ended Questions Duration(Mins)</b></td><td><input type="text" name="duration2" value="" size="16" onkeyup="isnum(this)" /></td>
                             </tr>
                         <tr>
                             <td><b>Test From</b> </td><td><input id="testfrom" type="text" name="testfrom" value="" size="16" readonly /></td>
