@@ -177,10 +177,10 @@ echo '<br>';
                         <tr><td><b>Open-ended Questions Duration(Mins)</b></td><td><input type="text" name="duration2" value="<?php if (isset($_POST['duration2'])) echo $_POST['duration2']; ?>" size="16" onkeyup="isnum(this)" /></td>
                             </tr>
                         <tr>
-                            <td><b>Test From</b> </td><td><input id="testfrom" type="text" name="testfrom" value="<?php if (isset($_POST['testfrom'])) echo $_POST['testfrom']; ?>" size="16" readonly /></td>
+                            <td><b>Test Begin</b> </td><td><input id="testfrom" type="text" name="testfrom" value="<?php if (isset($_POST['testfrom'])) echo $_POST['testfrom']; ?>" size="16" readonly /></td>
                         </tr>
                         <tr>
-                            <td><b>Test To</b> </td><td><input id="testto" type="text" name="testto" value="<?php if (isset($_POST['testto'])) echo $_POST['testto']; ?>" size="16" readonly /></td>
+                            <td><b>Test End</b> </td><td><input id="testto" type="text" name="testto" value="<?php if (isset($_POST['testto'])) echo $_POST['testto']; ?>" size="16" readonly /></td>
                         </tr>
                          <tr>
                             <td><b>Test Secret Code</b></td><td><input type="text" name="testcode" value="<?php if (isset($_POST['testcode'])) echo $_POST['testcode']; ?>" size="16" onkeyup="isalphanum(this)" /></td>
@@ -284,10 +284,10 @@ exit();
                         <tr><td><b>Open-ended Questions Duration(Mins)</b></td><td><input type="text" name="duration2" value="" size="16" onkeyup="isnum(this)" /></td>
                             </tr>
                         <tr>
-                            <td><b>Test From</b> </td><td><input id="testfrom" type="text" name="testfrom" value="" size="16" readonly /></td>
+                            <td><b>Test Begin</b> </td><td><input id="testfrom" type="text" name="testfrom" value="" size="16" readonly /></td>
                         </tr>
                         <tr>
-                            <td><b>Test To</b> </td><td><input id="testto" type="text" name="testto" value="" size="16" readonly /></td>
+                            <td><b>Test End</b> </td><td><input id="testto" type="text" name="testto" value="" size="16" readonly /></td>
                         </tr>
                          <tr>
                             <td><b>Test Secret Code</b></td><td><input type="text" name="testcode" value="" size="16" onkeyup="isalphanum(this)" /></td>

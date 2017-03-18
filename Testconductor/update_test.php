@@ -27,7 +27,9 @@ if(isset($_POST['save'])){
 	$totime = $_POST['testto'] . " 23:59:59";
 	$desc = $_POST['t_desc'];
 	$tqn = $_POST['t_question'];
+	$tqn2 = $_POST['t_question2'];
 	$duration = $_POST['d_test'];
+	$duration2 = $_POST['d_test2'];
 	$tcode = $_POST['t_code'];
 	$cid = $_POST['c_id'];
 	$tname = $_POST['t_name'];
@@ -40,7 +42,7 @@ if(isset($_POST['save'])){
 	if(empty($errors)){
 
 		$q = "update Test set cid = '$cid',testname = '$tname',testdesc = '$desc',testfrom = '$fromtime',
-		testto = '$totime',duration = $duration,totalquestions = $tqn,testcode = '$tcode',tcid = $tcid
+		testto = '$totime',duration = $duration,opduration = $duration2,totalquestions = $tqn,totalopquestion = $tqn2,testcode = '$tcode',tcid = $tcid
 		where testid = $tid";
 		$r = @mysqli_query($dbc, $q);
 		if($r){
@@ -119,8 +121,10 @@ echo '<br>';
 <td>Test Decription: </td><td><input type="text" name="t_desc"  value="<?php if (isset($_POST['t_desc'])) echo $_POST['t_desc']; ?>"  /></td></tr>
 <td>Test From: </td><td><input id="testfrom" type="text" readonly name="testfrom" value="<?php if (isset($_POST['testfrom'])) echo $_POST['testfrom']; ?>"/></td></tr>
 <td>Test To: </td><td><input id="testto" type="text" readonly name="testto" value="<?php if (isset($_POST['testto'])) echo $_POST['testto']; ?>"/></td></tr>
-<td>Duration: </td><td><input type="text" name="d_test"  value="<?php if (isset($_POST['d_test'])) echo $_POST['d_test']; ?>" onkeyup="isnum(this)"/></td></tr>
-<td>Total Question: </td><td><input type="text" name="t_question" value="<?php if (isset($_POST['t_question'])) echo $_POST['t_question']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Multi-Questions Duration: </td><td><input type="text" name="d_test"  value="<?php if (isset($_POST['d_test'])) echo $_POST['d_test']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Open-ended Questions Duration: </td><td><input type="text" name="d_test2"  value="<?php if (isset($_POST['d_test2'])) echo $_POST['d_test2']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Multi-Questions: </td><td><input type="text" name="t_question" value="<?php if (isset($_POST['t_question'])) echo $_POST['t_question']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Open-ended Questions: </td><td><input type="text" name="t_question2" value="<?php if (isset($_POST['t_question2'])) echo $_POST['t_question2']; ?>" onkeyup="isnum(this)"/></td></tr>
 <td>Test Code: </td><td><input type="text" name="t_code" value="<?php if (isset($_POST['t_code'])) echo $_POST['t_code']; ?>"/></td></tr>
 
 </table><br>
@@ -187,10 +191,12 @@ if(isset($_GET['id'])){
 <tr> <td>Course ID: </td><td><input type="text" readonly name="c_id" value="<?php echo $row['cid']; ?>"/></td></tr>
 <td>Testname: </td><td><input type="text" name="t_name"  value="<?php echo $row['testname']; ?>"/></td></tr>
 <td>Test Decription: </td><td><input type="text" name="t_desc"  value="<?php echo $row['testdesc']; ?>"  /></td></tr>
-<td>Test From: </td><td><input id="testfrom" type="text" readonly name="testfrom" value="<?php echo $tf; ?>"/></td></tr>
-<td>Test To: </td><td><input id="testto" type="text" readonly name="testto" value="<?php echo $tt; ?>"/></td></tr>
-<td>Duration: </td><td><input type="text" name="d_test"  value="<?php echo $row['duration']; ?>" onkeyup="isnum(this)"/></td></tr>
-<td>Total Question: </td><td><input type="text" name="t_question" value="<?php echo $row['totalquestions']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Test Begin: </td><td><input id="testfrom" type="text" readonly name="testfrom" value="<?php echo $tf; ?>"/></td></tr>
+<td>Test End: </td><td><input id="testto" type="text" readonly name="testto" value="<?php echo $tt; ?>"/></td></tr>
+<td>Muti-Questions Duration: </td><td><input type="text" name="d_test"  value="<?php echo $row['duration']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Open-ended Question Duration: </td><td><input type="text" name="d_test2"  value="<?php echo $row['opduration']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Muti-Questions: </td><td><input type="text" name="t_question" value="<?php echo $row['totalquestions']; ?>" onkeyup="isnum(this)"/></td></tr>
+<td>Open-ended Question: </td><td><input type="text" name="t_question2" value="<?php echo $row['totalopquestion']; ?>" onkeyup="isnum(this)"/></td></tr>
 <td>Test Code: </td><td><input type="text" name="t_code" value="<?php echo $row['testcode']; ?>"/></td></tr>
 </table><br>
 <input type="submit" name="save" value="Save" class="subbtn">
