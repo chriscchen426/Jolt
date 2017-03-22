@@ -132,7 +132,7 @@ echo '<br>';
 <form action="upload_questionbank.php" method="post" enctype="multipart/form-data">
 <table border = "1">
 
-<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td></tr>
+<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td><td><a href="download.php">download temple</a></td</tr>
 </table>
 <br>
 <input type="submit" name="upload" value="Upload" class="subbtn"/>

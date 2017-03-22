@@ -88,6 +88,8 @@ if(isset($_POST['upload'])){
 			}
 }
 
+
+
 ?>
 <html>
     <head>
@@ -130,12 +132,15 @@ echo '<br>';
 <form action="upload_Opquestionbank.php" method="post" enctype="multipart/form-data">
 <table border = "1">
 
-<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td></tr>
+<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td><td><a href="downloadOp.php">download temple</a></td></tr>
 </table>
+
 <br>
+
 <input type="submit" name="upload" value="Upload" class="subbtn"/>
 <input type="submit" value="Cancel" name="cancel" class="subbtn">
 </form>
+
 </div>
 </div>
 </body>

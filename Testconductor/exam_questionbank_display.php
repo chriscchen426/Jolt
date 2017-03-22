@@ -67,7 +67,7 @@ if (isset($_SESSION['tcname'])) {
     // Navigations
 ?>
                        
-<li><input type="submit" value="Cancel" name="cancel" class="subbtn"></li>
+<li><input type="submit" value="Back" name="cancel" class="subbtn"></li>
 <li><input type="submit" value="Upload MtQuestion" name="upload" class="subbtn"></li>
 <li><input type="submit" value="Add MtQuestion" name="add" class="subbtn"></li>
 
@@ -111,7 +111,7 @@ if (isset($_SESSION['tcname'])) {
                                  <table cellpadding="30" cellspacing="5" class="datatable">
                                     <tr>
                                          
-                                         <th>Open_ended Qn No.</th>
+                                         <th>Open ended Qn No.</th>
                                          <th>Question</th>
                                          <th>Correct Answer</th>
                                          <th>Marks</th>

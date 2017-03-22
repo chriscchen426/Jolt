@@ -1,0 +1,11 @@
+Question,Option A,Option B,Option C,Option D,Correct Option,Marks
+Which statements is coorect way to show the resuts without including null values?,select *from M where qty != NULL;,select *from M where qty is not NULL;,select *from M where qty <> NULL;,select *from M where qty not in (NULL);,optionb,10
+Which statements is not illegal for CREATE command?,CREATE Table,CREATE Stored Procedure,CREATE View,CREATE Column,optiond,10
+"To sort column in SQL, Which statements you can use?",SELECT FROM GROUP BY;,SELECT FROM WHERE;,SELECT FROM ORDER BY ;,None of above,optionc,5
+Which PHP MySql function will create a new session for session variable?,mysql_query();,mysql_select_db();,mysql_connect();,mysql_fetch_array();,optionc,10
+What type of programming language is PHP?,Machine Language,Compiled Language,Interpreter Language,None of above,optionc,5
+"Which statements is NOT a coorect way to create index based on ID field of an existing table Test(id int,name varchar(10))?",Create index id_index on Test(id) using btree;,Create index id_index on Test(id) using hash;,Create unique index id_index on Test(id);,Create id_index on Test(id);,optiond,10
+What best describes the relationship between indexes and SQL performance?,Indexes are only used in special cases.,Indexes are used to make table storage more efficient.,Indexes rarely make a difference in SQL performance.,Indexes exist solely to improve query speed.,optiond,5
+"Which of the following is the primary key of the following table?  Table: Product_Order(Order_id,Product_id,Qty)",Order_id,Product_id,Qty,Order_id and Product_id,optiond,10
+Which of thefollowing is subset of the database or it may contain virtual data that is derived from the database files but not explicitly stored?,Table,Stored procedure,View,Schema,optionc,5
+Which is used to link tables together and create a relationship?,Primary key,Candidate key,Foreign key,Unique key,optionc,5
