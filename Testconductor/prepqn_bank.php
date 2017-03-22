@@ -15,7 +15,7 @@ echo '<h4 align = "right" style = "color : #0000FF"> Welcome, Professor ' . $_SE
 //if(isset($_GET['id'])){
 include '../mysqli_connect.php';
 if (isset($_POST['cancel']) == 'Cancel') {
-	header('Location: exam_question_display.php');
+	header('Location: exam_questionbank_display.php');
 }
 if(isset($_POST['add'])){
 	
@@ -26,7 +26,7 @@ if (strcmp($_POST['correctans'], "<Choose the Correct Answer>") == 0 || empty($_
 if (strcasecmp($_POST['optiona'], $_POST['optionb']) == 0 || strcasecmp($_POST['optiona'], $_POST['optionc']) == 0 || strcasecmp($_POST['optiona'], $_POST['optiond']) == 0 || strcasecmp($_POST['optionb'], $_POST['optionc']) == 0 || strcasecmp($_POST['optionb'], $_POST['optiond']) == 0 || strcasecmp($_POST['optionc'], $_POST['optiond']) == 0) {
 	$errors[] = 'Two or more options are representing same answers.Verify Once again.';
 }
-$r = "select * from Question where testid=" . $_SESSION['testqn'] . " and question='" . htmlspecialchars($_REQUEST['question'], ENT_QUOTES) . "'";
+$r = "select * from QuestionBank where question='" . htmlspecialchars($_REQUEST['question'], ENT_QUOTES) . "'";
 $result = @mysqli_query($dbc, $r);
 if ($r1 = mysqli_fetch_array($result)) {
 	
@@ -37,7 +37,7 @@ if ($r1 = mysqli_fetch_array($result)) {
 
 if(empty($errors)){
 	
-$sql = "select max(qnid) as qn from Question where testid=" . $_SESSION['testqn'] . "";
+$sql = "select max(qnid) as qn from QuestionBank";
 $result = @mysqli_query($dbc, $sql);
 $r = mysqli_fetch_array($result);
 if(is_null($r['qn'])){
@@ -54,13 +54,13 @@ $d = $_POST['optiond'];
 $marks = $_POST['marks'];
 $ans = $_POST['correctans'];
 $tid = (int)$_SESSION['testqn'];
-	$sql = "Insert into Question values($tid,$newstd,'$qs','$a','$b','$c','$d','$ans',$marks,".$_SESSION['tcid'].")";
+	$sql = "Insert into QuestionBank values($newstd,'$qs','$a','$b','$c','$d','$ans',$marks,".$_SESSION['tcid'].")";
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
 	$success[] = 'New question has been created. <a href="prepqn.php">Add More Question</a>';
 		//exit();
-		header('Location: exam_question_display.php');
+		header('Location: exam_questionbank_display.php');
 		
 	}else{
 		echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';
@@ -145,20 +145,11 @@ echo '<br>';
             </div><br>
    <div align="center"><br><br>
     <h2 style = "color : #0000FF">Question Preparation Form</h2><br>
-    <form action = "prepqn.php" method="post">
+    <form action = "prepqn_bank.php" method="post">
     <?php
     
-$sql = "select count(*) as q from Question where testid=" . $_SESSION['testqn'] . "";
-$result = @mysqli_query($dbc, $sql);
-$r1 = mysqli_fetch_array($result);
+    
 
-$r = "select totalquestions from Test where testid=" . $_SESSION['testqn'] . "";
-$result = @mysqli_query($dbc, $r);
-$r2 = mysqli_fetch_array($result);
-if ((int) $r1['q'] == (int) htmlspecialchars_decode($r2['totalquestions'], ENT_QUOTES))
-    echo "<div class=\"pmsg\"> Test Name: " . $_SESSION['testname'] . "<br/>Course ID: " . $_SESSION['cid'] . "<br/>Status: All the Questions are Created for this test.</div>";
-else
-    echo "<div class=\"pmsg\"> Test Name: " . $_SESSION['testname'] . "<br/>Course ID: " . $_SESSION['cid'] . "";
 ?>
 <div class="container">
   <table cellpadding="20" cellspacing="40" style="text-align:left;" >

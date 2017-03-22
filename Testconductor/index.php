@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
 ?>
 <html>
   <head>
-    <title>Online Examination System</title>
+    <title>Java Online Learning and Testing System</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="../pinesh.css">
     <link rel="stylesheet" type="text/css" href="../login.css"/>

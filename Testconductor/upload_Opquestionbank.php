@@ -63,7 +63,7 @@ if(isset($_POST['upload'])){
 			fgets($handle);
 			
 				while(($fileop = fgetcsv($handle,1000,",")) !== false){
-				$sql = "select max(qnid) as qn from OpQuestion where testid=" . $_SESSION['testqn'] . "";
+				$sql = "select max(qnid) as qn from OpQuestionBank";
                 $result = @mysqli_query($dbc, $sql);
                 $r = mysqli_fetch_array($result);
                if(is_null($r['qn'])){
@@ -73,15 +73,15 @@ if(isset($_POST['upload'])){
                }
                //echo $newstd;
 					//if($newstd <= $r1['totalquestions']){
-					$v = "INSERT INTO OpQuestion values
-					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]',".$_SESSION['tcid'].")"; 
+					$v = "INSERT INTO OpQuestionBank values
+					($newstd,'$fileop[0]','$fileop[1]','$fileop[2]',".$_SESSION['tcid'].")"; 
 					$t = @mysqli_query($dbc, $v);
 					if(!$t){
 						echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$t . '</p>';
 					}
 					//}
 					}
-					header('Location: exam_question_display.php');
+					header('Location: exam_questionbank_display.php');
 					
 				}
 					
@@ -121,16 +121,15 @@ echo '<br>';
 ?>
 <div id="container">
    <div class="header">
-                <img style="margin:10px 2px 2px 10px;float:left;" height="80" width="200" src="../images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i>...because Examination Matters</i></h4>
+                <img style="margin:10px 2px 2px 10px;float:left;" height="80" width="200" src="../images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System</h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i>...because Examination Matters</i></h4>
             </div>
             <div align="center"><br><br>
             <body>
 
 <h2 style = "color : #0000FF">Test Questions Upload Form</h2><br>
-<form action="upload_Opquestions.php" method="post" enctype="multipart/form-data">
+<form action="upload_Opquestionbank.php" method="post" enctype="multipart/form-data">
 <table border = "1">
-<tr> <td>Test ID </td><td><input type="text" name="tid" readonly size = "34" value="<?php echo $_SESSION['testqn'] ?>" /></td></tr>
-<tr> <td>Course ID </td><td><input type="text" name="tid" readonly size = "34" value="<?php echo $_SESSION['course_id']." ".$_SESSION['course_name'] ?>" /></td></tr>
+
 <tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td></tr>
 </table>
 <br>
