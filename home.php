@@ -13,12 +13,12 @@ $sid = $_SESSION['stdid'];
 //echo $sid;
 echo '<h4 align = "right" style = "color : #0000FF"> Welcome, ' . $_SESSION['stdname'] . '<br></h4>';
 //echo 'Welcome ' . $_SESSION['stdname'] . '<br><br>';
-//echo '<h2 style = "color : #0000FF">Welcome Online Examination System</h2><br>';
+//echo '<h2 style = "color : #0000FF">Welcome Java Online Learning and Testing System</h2><br>';
 
 ?>
 <html>
 <head>
-<title>Online Examination System</title>
+<title>Java Online Learning and Testing System</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="oes.css"/>
      <link rel="stylesheet" type="text/css" href="pinesh.css"/>
@@ -44,7 +44,7 @@ a:active {
 <body>
 <div id="container">
  <div class="header">
-   <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Online Examination System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
+   <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
             </div>
  
 <br><br><br>

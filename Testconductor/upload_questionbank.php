@@ -9,7 +9,7 @@ echo '<pre><h2 align = "right"><a href="home.php"><img src="home.jpg" width="50"
 //echo '<h2 align = "right" style="font-family:tempus sans itc"><a href="home.php">Home</a> <a href="logout.php">Logout</a></h2>';
 echo '<h4 align = "right" style = "color : #0000FF"> Welcome, Professor ' . $_SESSION['tcname'] . '<br></h4>';
 if (isset($_POST['cancel']) == 'Cancel') {
-	header('Location: home.php');
+	header('Location: exam_questionbank_display.php');
 }
 include '../mysqli_connect.php';
 $errors = array();
@@ -132,7 +132,7 @@ echo '<br>';
 <form action="upload_questionbank.php" method="post" enctype="multipart/form-data">
 <table border = "1">
 
-<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td><td><a href="download.php">download temple</a></td</tr>
+<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td><td><a href="download.php">download template</a></td</tr>
 </table>
 <br>
 <input type="submit" name="upload" value="Upload" class="subbtn"/>

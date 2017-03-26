@@ -3,6 +3,7 @@
 
 <?php
 session_start();
+
 if(!isset($_SESSION['stdname'])){
 	header('Location: student_login.php');
 }
@@ -15,6 +16,7 @@ $final=false;
 include 'mysqli_connect.php';
 date_default_timezone_set("America/New_York");
 $b = date('Y-m-d h:i:s');
+
 /*
 $q = "select NOW() as cur";
 $result = @mysqli_query($dbc, $q);
@@ -201,10 +203,9 @@ $r = mysqli_fetch_array($result);
 {
 	
 	//next question
-	
 	$answer='unanswered';
-	// if($b < $_SESSION['endtime'])
-	// {
+	if($b < $_SESSION['opendtime'])
+	{
 		//echo $_SESSION['endtime'];
 		if(isset($_POST['markreview']))
 		{
@@ -223,7 +224,7 @@ $r = mysqli_fetch_array($result);
 			if(strcmp($answer,"answered")==0)
 			{
 				$query="update StudentOpQuestion set answered='answered',stdanswer='".htmlspecialchars($_POST['answer'],ENT_QUOTES)."' where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
-				echo $query;
+				//echo $query;
 			}
 			else
 			{
@@ -248,7 +249,7 @@ $r = mysqli_fetch_array($result);
 			//summary page
 			header('Location: summaryop.php');
 		}
-	//}
+	}
 	if((int)$_SESSION['qn']<(int)$_SESSION['tqn'])
 	{
 		$_SESSION['qn']=$_SESSION['qn']+1;
@@ -265,8 +266,9 @@ else if(isset($_POST['previous']))
 {
 	// Perform the changes for current question
 	//$answer='unanswered';
-	// if($b < $_SESSION['endtime'])
-	// {
+	if($b < $_SESSION['opendtime'])
+	{
+
 		if(isset($_POST['markreview']))
 		{
 			$answer='review';
@@ -298,7 +300,7 @@ else if(isset($_POST['previous']))
 			}
 			
 		}
-	//}
+	}
 	//previous question
 	if((int)$_SESSION['qn']>1)
 	{
@@ -344,7 +346,7 @@ else if(isset($_POST['previous']))
 	$rqqq = mysqli_fetch_array($resultqqq);
 
    $_SESSION['tqn'] = $rqq['max'];
-
+   //echo $_SESSION['starttime']."~~~~";
    ?>
         
           <html>
@@ -360,13 +362,13 @@ else if(isset($_POST['previous']))
         <script type="text/javascript" src="cdtimer.js" ></script>
         <script type="text/javascript" >
         <?php
-        if (!isset($_REQUEST['finalsumbit']) && isset($_SESSION['starttime'])) {
-            $elapsed=time()-strtotime($_SESSION['starttime']);
-if(((int)$elapsed/60)<(int)$_SESSION['duration'])
+        if (!isset($_REQUEST['finalsumbit']) && isset($_SESSION['opstarttime'])) {
+            $elapsed=time()-strtotime($_SESSION['opstarttime']);
+if(((int)$elapsed/60)<(int)$_SESSION['opduration'])
 {
-	$q = "select TIME_FORMAT(TIMEDIFF(endtime,CURRENT_TIMESTAMP),'%H') as hour,
-		TIME_FORMAT(TIMEDIFF(endtime,CURRENT_TIMESTAMP),'%i') as min,
-		TIME_FORMAT(TIMEDIFF(endtime,CURRENT_TIMESTAMP),'%s') as sec from StudentTest 
+	$q = "select TIME_FORMAT(TIMEDIFF(opendtime,CURRENT_TIMESTAMP),'%H') as hour,
+		TIME_FORMAT(TIMEDIFF(opendtime,CURRENT_TIMESTAMP),'%i') as min,
+		TIME_FORMAT(TIMEDIFF(opendtime,CURRENT_TIMESTAMP),'%s') as sec from StudentTest 
 		where sid=".$_SESSION['stdid']." and testid=".$_SESSION['testid']."";
 	$result = @mysqli_query($dbc, $q);
 	if($rslt=mysqli_fetch_array($result))

@@ -108,7 +108,7 @@ if (isset($_SESSION['tcname'])) {
                                  }
                                  ?>
                                  </table>
-                                 <table cellpadding="30" cellspacing="5" class="datatable">
+                                 <table cellpadding="30" cellspacing="10" class="datatable">
                                     <tr>
                                          
                                          <th>Open ended Qn No.</th>

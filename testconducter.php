@@ -15,6 +15,7 @@ $final=false;
 include 'mysqli_connect.php';
 date_default_timezone_set("America/New_York");
 $b = date('Y-m-d h:i:s');
+
 /*
 $q = "select NOW() as cur";
 $result = @mysqli_query($dbc, $q);
@@ -59,6 +60,7 @@ if(isset($_POST['next']) || isset($_POST['summary']) || isset($_POST['viewsummar
 	//next question
 	
 	$answer='unanswered';
+
 	if($b < $_SESSION['endtime'])
 	{
 		//echo $_SESSION['endtime'];
@@ -119,6 +121,7 @@ else if(isset($_POST['previous']))
 {
 	// Perform the changes for current question
 	$answer='unanswered';
+
 	if($b < $_SESSION['endtime'])
 	{
 		if(isset($_POST['markreview']))
@@ -180,12 +183,13 @@ else if(isset($_POST['previous']))
    	echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$sql . '</p>';
    }
    //$q = "SELECT * FROM Question ORDER BY RAND() LIMIT 5";
-   $q = "select *from Question Q,StudentQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
+   $q = "select * from Question Q,StudentQuestion SQ where Q.testid = SQ.testid and Q.qnid = SQ.qnid and Q.testid=".$_SESSION['testid']." 
 		and sid=".$_SESSION['stdid']." and SQ.sequence = ".$_SESSION['qn']."";
    //$q = "select * from Question where testid=".$_SESSION['testid']." and qnid=".$_SESSION['qn']."";
    $result = @mysqli_query($dbc, $q);
    $r=mysqli_fetch_array($result);
    $_SESSION['qn'] = $r['sequence'];
+   $_SESSION['fqn']=1;
    $_SESSION['qn1'] = $r['qnid'];
    
    }
@@ -237,7 +241,7 @@ else
               <table border="0" width="100%" class="ntab">
                   <tr>
                       <th style="width:40%;"><h3><span id="timer" class="timerclass"></span></h3></th>
-                      <th style="width:40%;"><h4 style="color: #af0a36;">Question No: <?php echo $_SESSION['qn1']; ?> </h4></th>
+                      <th style="width:40%;"><h4 style="color: #af0a36;">Question No: <?php echo $_SESSION['qn']; ?> </h4></th>
                       <th style="width:20%;"><h4 style="color: #af0a36;"><input type="checkbox" name="markreview" value="mark"> Mark for Review</input></h4></th>
                   </tr>
               </table>

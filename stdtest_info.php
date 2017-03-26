@@ -65,7 +65,7 @@ if($num == 0){
 		if (mysqli_num_rows($result) == 0) {
 			echo "Tests questions cannot be selected.Please Try after some time!";
 		}else{
-			$t = "insert into StudentTest values(" . $_SESSION['stdid'] . "," . $_SESSION['testid'] . ",(select CURRENT_TIMESTAMP),date_add((select CURRENT_TIMESTAMP),INTERVAL (select duration from Test where testid=" . $_SESSION['testid'] . ") MINUTE),0,'inprogress')";
+			$t = "insert into StudentTest values(" . $_SESSION['stdid'] . "," . $_SESSION['testid'] . ",(select CURRENT_TIMESTAMP),date_add((select CURRENT_TIMESTAMP),INTERVAL (select duration from Test where testid=" . $_SESSION['testid'] . ") MINUTE),(select CURRENT_TIMESTAMP),date_add((select CURRENT_TIMESTAMP),INTERVAL (select opduration from Test where testid=" . $_SESSION['testid'] . ") MINUTE),0,'inprogress')";
 			$k = @mysqli_query($dbc, $t);
 			if(!$k){
 				echo "error" . mysqli_error();
@@ -93,16 +93,20 @@ if($num == 0){
 						//$error = true;
 					}
 				}
-		$sql = "select duration from Test where testid=" . $_SESSION['testid'] . "";
+		$sql = "select duration,opduration from Test where testid=" . $_SESSION['testid'] . "";
 		$result = @mysqli_query($dbc, $sql);
 		$r = mysqli_fetch_array($result);
 		//$_SESSION['tqn'] = htmlspecialchars_decode($r['totalquestions'], ENT_QUOTES);
 		$_SESSION['duration'] = htmlspecialchars_decode($r['duration'], ENT_QUOTES);
-		$q = "select DATE_FORMAT(starttime,'%Y-%m-%d %H:%i:%s') as startt,DATE_FORMAT(endtime,'%Y-%m-%d %H:%i:%s') as endt from StudentTest where testid=" . $_SESSION['testid'] . " and sid=" . $_SESSION['stdid'] . "";
+		$_SESSION['opduration'] = htmlspecialchars_decode($r['opduration'], ENT_QUOTES);
+
+		$q = "select DATE_FORMAT(starttime,'%Y-%m-%d %H:%i:%s') as startt,DATE_FORMAT(endtime,'%Y-%m-%d %H:%i:%s') as endt, DATE_FORMAT(opstarttime,'%Y-%m-%d %H:%i:%s') as opstartt,DATE_FORMAT(opendtime,'%Y-%m-%d %H:%i:%s') as opendt from StudentTest where testid=" . $_SESSION['testid'] . " and sid=" . $_SESSION['stdid'] . "";
 		$result = @mysqli_query($dbc, $q);
 		$r = mysqli_fetch_array($result);
 		$_SESSION['starttime'] = $r['startt'];
 		$_SESSION['endtime'] = $r['endt'];
+		$_SESSION['opstarttime'] = $r['opstartt'];
+		$_SESSION['opendtime'] = $r['opendt'];
 		$_SESSION['qn'] = 1;
 		header('Location: testconducter.php');
 		}
@@ -119,7 +123,7 @@ if($num == 0){
    ?>                             
 <html>
     <head>
-        <title>Online Examination System</title>
+        <title>Java Online Learning and Testing System</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="oes.css"/>
     <script type="text/javascript" src="validate.js" ></script>
@@ -137,7 +141,7 @@ foreach($errors as $msg){
 ?>
 <div id="container">
  <div class="header">
-   <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Online Examination System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
+   <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
             </div>
 <br><br><br>
 <form action="stdtest_info.php" method="post">

@@ -131,7 +131,7 @@ echo '<br>';
 <table border = "1">
 <tr> <td>Test ID </td><td><input type="text" name="tid" readonly size = "34" value="<?php echo $_SESSION['testqn'] ?>" /></td></tr>
 <tr> <td>Course ID </td><td><input type="text" name="tid" readonly size = "34" value="<?php echo $_SESSION['course_id']." ".$_SESSION['course_name'] ?>" /></td></tr>
-<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td><td><a href="downloadOp.php">download temple</a></td</tr>
+<tr> <td>Select File:</td><td><input type="file" name="file" accept=".csv"/></td> <td><font style = "color:#ff0000;">Please select only .CSV file</td><td><a href="downloadOp.php">download template</a></td</tr>
 </table>
 <br>
 <input type="submit" name="upload" value="Upload" class="subbtn"/>

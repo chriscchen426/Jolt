@@ -44,7 +44,7 @@ include 'mysqli_connect.php';
         ?>
         <div id="container">
             <div class="header">
-                <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Online Examination System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
+                <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
             </div>
             <form id="summary" action="viewresult.php" method="post">
                 <div class="menubar">
@@ -77,6 +77,7 @@ include 'mysqli_connect.php';
                                                     where s.sid=st.sid and st.testid=t.testid and 
                                                   t.cid=sub.cid and st.sid=".$_SESSION['stdid']." 
                                                     and st.testid=".$_REQUEST['details']."";
+                            //echo $q;
                             $result = @mysqli_query($dbc, $q);
                             if(mysqli_num_rows($result)!=0) {
 
@@ -138,6 +139,7 @@ include 'mysqli_connect.php';
                                                 where q.qnid=sq.qnid and sq.testid=q.testid and 
                                                sq.testid=".$_REQUEST['details']." and sq.sid=".$_SESSION['stdid']." order by q.qnid";
                                 $result1 = @mysqli_query($dbc, $v);
+                                $_SESSION['fqn']=0;
 
                                 if(mysqli_num_rows($result1)==0) {
                                     echo"<h3 style=\"color:#0000cc;text-align:center;\">1.Sorry because of some problems Individual questions Cannot be displayed.</h3>";
@@ -169,7 +171,7 @@ include 'mysqli_connect.php';
                                             if($r2=mysqli_fetch_array($result2)) {
                                                 ?>
                         <tr>
-                            <td><?php echo $r1['questionid']; ?></td>
+                            <td><?php $_SESSION['fqn']=$_SESSION['fqn']+1; echo $_SESSION['fqn']; ?></td>
                             
                             <td><?php echo htmlspecialchars_decode($r2['corans'],ENT_QUOTES); ?></td>
                             <td><?php echo htmlspecialchars_decode($r2['stdans'],ENT_QUOTES); ?></td>

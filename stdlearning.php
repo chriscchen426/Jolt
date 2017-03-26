@@ -14,7 +14,7 @@ if(isset($_GET['id'])){
 ?>
 <html>
 <head>
-<title>Online Examination System</title>
+<title>Java Online Learning and Testing System</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="oes.css"/>
     <script type="text/javascript" src="validate.js" ></script>
@@ -22,7 +22,7 @@ if(isset($_GET['id'])){
 <body>
 <div id="container">
  <div class="header">
-   <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Online Examination System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
+   <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
             </div>
  
 <br><br><br>
