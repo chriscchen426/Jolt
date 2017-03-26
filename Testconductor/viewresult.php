@@ -76,14 +76,13 @@ printpage.focus();
 
                         if(isset($_REQUEST['details'])) {
                             $q = "select s.sname,t.testname,sub.cname,sub.cid,DATE_FORMAT(st.starttime,'%d %M %Y %H:%i:%s') as stime,
-                                                  TIMEDIFF(st.endtime,st.starttime) as dur,(select sum(marks) from 
-                                                   Question where testid=".$_REQUEST['details'].") as tm,IFNULL((select sum(q.marks) from 
-                                                  StudentQuestion as sq, Question as q where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' 
+                                                  TIMEDIFF(st.endtime,st.starttime) as dur, TIMEDIFF(st.opendtime,st.opstarttime) as opdur, (select sum(marks) from Question where testid=".$_REQUEST['details'].") as tm, (select sum(marks) from OpQuestion where testid=".$_REQUEST['details'].") as optm, IFNULL((select sum(q.marks) from StudentQuestion as sq, Question as q where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' 
                                                   and sq.stdanswer=q.correctanswer and sq.sid=".$_REQUEST['stdid']." 
-                                                  and sq.testid=".$_REQUEST['details']."),0) as om from Student as s,Test as t, Course as sub,StudentTest as st 
+                                                  and sq.testid=".$_REQUEST['details']."),0) as om, (select sum(grade) from StudentOpQuestion where testid=".$_REQUEST['details']." and sid=".$_REQUEST['stdid'].") as opom from Student as s,Test as t, Course as sub,StudentTest as st 
                                                     where s.sid=st.sid and st.testid=t.testid and 
                                                   t.cid=sub.cid and st.sid=".$_REQUEST['stdid']." 
                                                     and st.testid=".$_REQUEST['details']."";
+                            //echo $q;
                             $result = @mysqli_query($dbc, $q);
                             if(mysqli_num_rows($result)!=0) {
 
@@ -114,19 +113,19 @@ printpage.focus();
                         </tr>
                         <tr>
                             <td>Test Duration</td>
-                            <td><?php echo $r['dur']; ?></td>
+                            <td><?php echo date('H:i:s', strtotime($r['dur'])+strtotime($r['opdur'])- strtotime('00:00:00')); ?></td>
                         </tr>
                         <tr>
                             <td>Max. Marks</td>
-                            <td><?php echo $r['tm']; ?></td>
+                            <td><?php echo $r['tm']+$r['optm']; ?></td>
                         </tr>
                         <tr>
                             <td>Obtained Marks</td>
-                            <td><?php echo $r['om']; ?></td>
+                            <td><?php echo $r['om']+$r['opom']; ?></td>
                         </tr>
                         <tr>
                             <td>Percentage</td>
-                            <td><?php echo round((($r['om']/$r['tm'])*100),1)." %"; ?></td>
+                            <td><?php echo round(((($r['om']+$r['opom'])/($r['tm']+$r['optm']))*100),1)." %"; ?></td>
                         </tr>
                         <tr>
                             <td colspan="2" ><hr style="color:#ff0000;border-width:2px;"/></td>

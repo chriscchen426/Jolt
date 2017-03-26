@@ -69,11 +69,9 @@ include 'mysqli_connect.php';
 
                         if(isset($_REQUEST['details'])) {
                             $q = "select s.sname,t.testname,sub.cname,sub.cid,DATE_FORMAT(st.starttime,'%d %M %Y %H:%i:%s') as stime,
-                                                  TIMEDIFF(st.endtime,st.starttime) as dur,(select sum(marks) from 
-                                                   Question where testid=".$_REQUEST['details'].") as tm,IFNULL((select sum(q.marks) from 
-                                                  StudentQuestion as sq, Question as q where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' 
+                                                  TIMEDIFF(st.endtime,st.starttime) as dur, TIMEDIFF(st.opendtime,st.opstarttime) as opdur, (select sum(marks) from Question where testid=".$_REQUEST['details'].") as tm, (select sum(marks) from OpQuestion where testid=".$_REQUEST['details'].") as optm, IFNULL((select sum(q.marks) from StudentQuestion as sq, Question as q where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' 
                                                   and sq.stdanswer=q.correctanswer and sq.sid=".$_SESSION['stdid']." 
-                                                  and sq.testid=".$_REQUEST['details']."),0) as om from Student as s,Test as t, Course as sub,StudentTest as st 
+                                                  and sq.testid=".$_REQUEST['details']."),0) as om, (select sum(grade) from StudentOpQuestion where testid=".$_REQUEST['details']." and sid=".$_SESSION['stdid'].") as opom from Student as s,Test as t, Course as sub,StudentTest as st 
                                                     where s.sid=st.sid and st.testid=t.testid and 
                                                   t.cid=sub.cid and st.sid=".$_SESSION['stdid']." 
                                                     and st.testid=".$_REQUEST['details']."";
@@ -108,19 +106,19 @@ include 'mysqli_connect.php';
                         </tr>
                         <tr>
                             <td>Test Duration</td>
-                            <td><?php echo $r['dur']; ?></td>
+                            <td><?php echo date('H:i:s', strtotime($r['dur'])+strtotime($r['opdur'])- strtotime('00:00:00')); ?></td>
                         </tr>
                         <tr>
                             <td>Max. Marks</td>
-                            <td><?php echo $r['tm']; ?></td>
+                            <td><?php echo $r['tm']+$r['optm']; ?></td>
                         </tr>
                         <tr>
                             <td>Obtained Marks</td>
-                            <td><?php echo $r['om']; ?></td>
+                            <td><?php echo $r['om']+$r['opom']; ?></td>
                         </tr>
                         <tr>
                             <td>Percentage</td>
-                            <td><?php echo round((($r['om']/$r['tm'])*100),1)." %"; ?></td>
+                            <td><?php echo round(((($r['om']+$r['opom'])/($r['tm']+$r['optm']))*100),1)." %"; ?></td>
                         </tr>
                         <tr>
                             <td colspan="2" ><hr style="color:#ff0000;border-width:2px;"/></td>
@@ -283,17 +281,23 @@ include 'mysqli_connect.php';
                                         $m = "select sum(marks) as tm from Question where testid=".$r['testid']."";
                                         $result2 = @mysqli_query($dbc, $m);
                                         $r2=mysqli_fetch_array($result2);
+                                        $opm = "select sum(marks) as optm from OpQuestion where testid=".$r['testid']."";
+                                        $result3 = @mysqli_query($dbc, $opm);
+                                        $r3=mysqli_fetch_array($result3);
+                                        $opr = "select sum(grade) as opom from StudentOpQuestion where sid=".$_SESSION['stdid']." and testid=".$r['testid']."";
+                                        $result4 = @mysqli_query($dbc, $opr);
+                                        $r4=mysqli_fetch_array($result4);
                                         if($i%2==0) {
                                             echo "<tr class=\"alt\">";
                                         }
                                         else { echo "<tr>";}
                                         echo "<td>".$r['startt']."</td><td>".htmlspecialchars_decode($r['testname'],ENT_QUOTES)." : ".htmlspecialchars_decode($r['testdesc'],ENT_QUOTES)."</td>";
-                                        if(is_null($r2['tm'])) {
+                                        if(is_null($r2['tm']) || is_null($r3['optm'])) {
                                             $tm=0;
                                             echo "<td>$tm</td>";
                                         }
                                         else {
-                                            $tm=$r2['tm'];
+                                            $tm=$r2['tm'] + $r3['optm'];
                                             echo "<td>$tm</td>";
                                         }
                                         if(is_null($r1['om'])) {
@@ -301,7 +305,7 @@ include 'mysqli_connect.php';
                                             echo "<td>$om</td>";
                                         }
                                         else {
-                                            $om=$r1['om'];
+                                            $om=$r1['om'] + $r4['opom'] ;
                                             echo "<td>$om</td>";
                                         }
                                         if($tm==0) {

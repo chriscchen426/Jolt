@@ -57,7 +57,7 @@ echo '<h4 align = "right" style = "color : #0000FF"> Welcome, Professor ' . $_SE
                     /************************** Step 3 - Case 2 *************************/
                         // Displays the Existing Test Results in detail, If any.
                             $q = "select t.testname,DATE_FORMAT(t.testfrom,'%d %M %Y') as fromdate,
-		DATE_FORMAT(t.testto,'%d %M %Y %H:%i:%S') as todate,sub.cid,sub.cname,IFNULL((select sum(marks) from Question where testid=".$_REQUEST['testid']."),0) as maxmarks 
+		DATE_FORMAT(t.testto,'%d %M %Y %H:%i:%S') as todate,sub.cid,sub.cname,IFNULL((select sum(marks) from Question where testid=".$_REQUEST['testid']."),0) as maxmarks, IFNULL((select sum(marks) from OpQuestion where testid=".$_REQUEST['testid']."),0) as opmaxmarks  
 		from Test as t, Course as sub where sub.cid=t.cid and t.testid=".$_REQUEST['testid']."" ;
                             $result = @mysqli_query($dbc, $q);
                             if(mysqli_num_rows($result)!=0) {
@@ -85,7 +85,7 @@ echo '<h4 align = "right" style = "color : #0000FF"> Welcome, Professor ' . $_SE
                         </tr>
                         <tr>
                             <td>Max. Marks</td>
-                            <td><?php echo $r['maxmarks']; ?></td>
+                            <td><?php echo $r['maxmarks']+$r['opmaxmarks']; ?></td>
                         </tr>
 
 
@@ -170,10 +170,13 @@ echo "</TABLE>\n";
                            $t = "select s.sid,s.sname,s.email,IFNULL((select sum(q.marks) from StudentQuestion as sq, Question as q 
 		                 where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' and 
 		                    sq.stdanswer=q.correctanswer and sq.sid=st.sid and 
-		           sq.testid=".$_REQUEST['testid']." order by sq.testid),0) as om from StudentTest as st, Student as s where 
+		           sq.testid=".$_REQUEST['testid']." order by sq.testid),0) as om, IFNULL((select sum(grade) from StudentOpQuestion as sq, OpQuestion as q 
+                         where sq.testid=q.testid and sq.qnid=q.qnid and sq.answered='answered' and 
+                            sq.sid=st.sid and 
+                   sq.testid=".$_REQUEST['testid']." order by sq.testid),0) as opom from StudentTest as st, Student as s where 
 		s.sid=st.sid and st.testid=".$_REQUEST['testid']."";
                                 $result1 = @mysqli_query($dbc, $t);
-
+                                //echo $t;
                                 if(mysqli_num_rows($result1)==0) {
                                     echo"<h3 style=\"color:#0000cc;text-align:center;\">No Students Yet Attempted this Test!</h3>";
                                 }
@@ -196,8 +199,8 @@ echo "</TABLE>\n";
                         <tr>
                             <td><?php echo htmlspecialchars_decode($r1['sname'],ENT_QUOTES); ?></td>
                             <td><?php echo htmlspecialchars_decode($r1['email'],ENT_QUOTES); ?></td>
-                            <td><?php echo $r1['om']; ?></td>
-                            <td><?php echo round((($r1['om']/$r['maxmarks'])*100),1)." %"; ?></td>
+                            <td><?php echo $r1['om']+$r1['opom']; ?></td>
+                            <td><?php echo round(((($r1['om']+$r1['opom'])/($r['maxmarks']+$r['opmaxmarks']))*100),1)." %"; ?></td>
                           <?php echo "<td class=\"tddata\"><a title=\"Details\" href=\"viewresult.php?details=".$_REQUEST['testid']."&stdid=".$r1['sid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>";?>
 
 

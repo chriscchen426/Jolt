@@ -227,7 +227,7 @@ if(isset($_POST['submit'])){
 
 }
 else{
-    echo "Error! can't get the information form post method.";
+    //echo "Error! can't get the information form post method.";
 }
 
                     

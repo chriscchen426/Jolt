@@ -38,6 +38,7 @@ $q = "select t.*,s.cname from Test as t, Course as s,TCS TS
 		and TS.sid = " . $_SESSION['stdid'] . " and t.testfrom < NOW() and
 		NOW() < t.testto  and 
 		NOT EXISTS(select sid,testid from StudentTest where testid=t.testid and sid=" . $_SESSION['stdid'] . ")";
+		//echo $q;
 $result = @mysqli_query($dbc, $q);
 
 //echo $q;
@@ -64,15 +65,16 @@ echo '<h2><p style = "color:#ff0000;">Sorry...! For this moment, You have not Of
 			</tr>
 			';
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))	{
-
+		$dur = $row['duration']+$row['opduration'];
+		$tolq = $row['totalquestions']+$row['totalopquestion'];
 		echo '<tr>
 
 				<td align="left">' . $row['testid'] . '</td>
 				<td align="left">' . $row['testname'] . '</td>
 				<td align="left">' . $row['testdesc'] . '</td>
 		        <td align="left">' . $row['cname'] . '</td>
-		         <td align="left">' . $row['duration'] . '</td>
-		        <td align="left">' . $row['totalquestions'] . '</td>
+		         <td align="left">' . $dur . '</td>
+		        <td align="left">' . $tolq . '</td>
 		        <td><a href=stdtest_info.php?id='.$row['testid'].'><strong>Take Test</strong></a></td>
 			';
 
