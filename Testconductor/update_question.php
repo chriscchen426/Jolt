@@ -36,14 +36,15 @@ $c = $_POST['optionc'];
 $d = $_POST['optiond'];
 $marks = $_POST['marks'];
 $ans = $_POST['correctans'];
+$dif = $_POST['difficulty'];
 		if(empty($errors)){
 
-			$check = "select belong from Question where testid = $tid AND qnid = $qid";
-			$rcheck = @mysqli_query($dbc, $rcheck);
-			if($_SESSION['tcid'] == $rcheck['belong']){
+			// $check = "select belong from Question where testid = $tid AND qnid = $qid";
+			// $rcheck = @mysqli_query($dbc, $rcheck);
+			//if($_SESSION['tcid'] == $rcheck['belong']){
 
 				$q = "update Question set question = '$qs',optiona = '$a',optionb = '$b',optionc = '$c',
-				optiond = '$d',correctanswer = '$ans',marks = '$marks' where testid = $tid AND qnid = $qid";
+				optiond = '$d',correctanswer = '$ans',difficulty = '$dif',marks = '$marks' where testid = $tid AND qnid = $qid";
 				$r = @mysqli_query($dbc, $q);
 				if($r){
 					header('Location: exam_question_display.php');
@@ -53,10 +54,10 @@ $ans = $_POST['correctans'];
 					//echo '<p style = "color:#ff0000">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$q . '</p>';
 					//exit();
 				}
-			}
-			else{
-				echo "You can't modify other conductor uploaded questions";
-			}
+			// }
+			// else{
+			// 	echo "You can't modify other conductor uploaded questions";
+			// }
 		}
 		
 		
@@ -109,7 +110,14 @@ echo '<br>';
                                             <option value="optionc">Option C</option>
                                             <option value="optiond">Option D</option>
                                         </select></td></tr>
-
+<tr> <td>Difficulty </td><td>
+<select name="difficulty">
+                                            <option value="<?php if (isset($_POST['difficulty'])) echo $_POST['difficulty']; ?>" selected><?php if (isset($_POST['difficulty'])) echo $_POST['difficulty']; echo "~~"; ?></option>
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
+                                            <option value="3">Hard</option>
+                                         
+                                        </select></td></tr>
 <tr> <td>Marks: </td><td><input type="text" name="marks" size = "50" value="<?php if (isset($_POST['marks'])) echo $_POST['marks']; ?>" onkeyup="isnum(this)" /></td></tr>
 </table><br>
 <input type="submit" name="save" value="Save" class="subbtn"/>
@@ -124,7 +132,7 @@ echo '<br>';
 
 $qid = $_GET['qid'];
 //$tid = $_GET['tid'];
-$q = "SELECT *FROM Question where qnid = $qid AND testid=" . $_SESSION['testqn'] . "";
+$q = "SELECT * FROM Question where qnid = $qid AND testid=" . $_SESSION['testqn'] . "";
 $r = @mysqli_query($dbc, $q);
 $row = mysqli_fetch_array($r);
 ?>
@@ -158,7 +166,28 @@ $row = mysqli_fetch_array($r);
                                             <option value="optionc">Option C</option>
                                             <option value="optiond">Option D</option>
                                         </select></td></tr>
+<tr> <td>Difficulty </td><td>  
+<select name="difficulty">
+                                            <?php if($row['difficulty'] == 1){?>
+                                            <option value="<?php echo $row['difficulty']; ?>" selected><?php echo "Easy"; ?></option>
+                                          
+                                            <option value="2">Medium</option>
+                                            <option value="3">Hard</option>
+                                        <?php }
+                                        elseif($row['difficulty'] == 2){?>
+                                        	<option value="<?php echo $row['difficulty']; ?>" selected><?php echo "Medium"; ?></option>
+                                          
+                                            <option value="1">Easy</option>
+                                            <option value="3">Hard</option>
+                                    <?php }else {?>
+                                    		<option value="<?php echo $row['difficulty']; ?>" selected><?php echo "Hard"; ?></option>
+                                          
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
 
+                                    <?php }?>
+                                            
+                                        </select></td></tr>
 <tr> <td>Marks: </td><td><input type="text" name="marks" size = "50" value="<?php echo $row['marks']; ?>" onkeyup="isnum(this)" /></td></tr>
 
 </table>

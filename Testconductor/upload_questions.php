@@ -29,9 +29,12 @@ if(isset($_POST['upload'])){
 			$handle = fopen($file,"r");
 			fgets($handle);
 			while(($fileop = fgetcsv($handle,1000,",")) !== false){
-				if(!preg_match('/^\d+$/',$fileop[6])) {
+				if(!preg_match('/^\d+$/',$fileop[7])) {
 					$errors[] = 'Invalid Marks for the question: ' .$fileop[0]. '. Please Check your CSV file.';
-				}elseif(empty($fileop[0]) || empty($fileop[1]) || empty($fileop[2]) || empty($fileop[3]) || empty($fileop[4]) || empty($fileop[5])){
+				}elseif($fileop[7]>3 || $fileop[7]<1){
+					$errors[] = 'Difficulty should only between 1 and 3';
+				}
+				elseif(empty($fileop[0]) || empty($fileop[1]) || empty($fileop[2]) || empty($fileop[3]) || empty($fileop[4]) || empty($fileop[5])|| empty($fileop[6])|| empty($fileop[7])){
 					$errors[] = 'Some of the fields of the question are empty. Please Check your CSV file.';
 			}
 			}
@@ -73,7 +76,7 @@ if(isset($_POST['upload'])){
                //echo $newstd;
 					//if($newstd <= $r1['totalquestions']){
 					$v = "INSERT INTO Question values
-					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]','$fileop[5]','$fileop[6]',".$_SESSION['tcid'].")"; 
+					($tid,$newstd,'$fileop[0]','$fileop[1]','$fileop[2]','$fileop[3]','$fileop[4]','$fileop[5]','$fileop[6]',".$_SESSION['tcid'].",'$fileop[7]')"; 
 					$t = @mysqli_query($dbc, $v);
 					if(!$t){
 						echo '<p style = "color:#ff0000;">' . mysqli_error($dbc) . '<br /> <br /> query: ' .$t . '</p>';

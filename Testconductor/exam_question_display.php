@@ -36,13 +36,19 @@ if (isset($_POST['addOp']) == 'Add Question') {
 if (isset($_POST['uploadOp']) == 'Upload Question') {
     header('Location: upload_Opquestions.php');
 }
+if (isset($_POST['addbank']) == 'Choose Questions from Bank') {
+    header('Location: upload_Opquestions.php');
+}
 
 
 $q = "select * from Question where testid=" . $_SESSION['testqn'] . " order by qnid";
+
 $result = @mysqli_query($dbc, $q);
 
 $q2 = "select * from OpQuestion where testid=" . $_SESSION['testqn'] . " order by qnid";
 $result2 = @mysqli_query($dbc, $q2);
+
+
 ?>
 <html>
     <head>
@@ -75,6 +81,7 @@ if (isset($_SESSION['tcname'])) {
 <li><input type="submit" value="Upload OpQuestion" name="uploadOp" class="subbtn"></li>
 <li><input type="submit" value="Add OpQuestion" name="addOp" class="subbtn"></li>
 
+<li><input type="submit" value="Choose Questions from Bank" name="addbank" class="subbtn"></li>
 
 <?php
             } 
@@ -87,12 +94,29 @@ if (isset($_SESSION['tcname'])) {
  	
  } else {
  	//$i = 0;
+    //$q = "SELECT *FROM OpQuestion where qnid = $qid AND testid=" . $_SESSION['testqn'] . "";
+    $q3 = "SELECT * from Test where testid=" . $_SESSION['testqn'] . "";
+    //echo $q3;
+    $result3 = @mysqli_query($dbc, $q3);    
+    $r3 = mysqli_fetch_array($result3);
+
  	?>
                                  <table cellpadding="30" cellspacing="10" class="datatable">
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Total Multiple Questions:</th>
+                                        <th><?php echo $r3['totalquestions']; ?></th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+
                                      <tr>
                                          <th>&nbsp;</th>
                                          <th>Qn.No</th>
-                                         <th>Question</th>
+                                         <th>Multiple Choice Question</th>
+                                         <th>Difficulty</th>
                                          <th>Correct Answer</th>
                                          <th>Marks</th>
                                          <th>Edit</th>
@@ -102,16 +126,53 @@ if (isset($_SESSION['tcname'])) {
                                      
                                          echo "<tr>";
                                       echo "<td><a href=delete_question.php?qid=".$r['qnid']."><strong>DELETE</strong></a></td><td>" . htmlspecialchars_decode($r['qnid'], ENT_QUOTES) 
-                                    . "</td><td>" . htmlspecialchars_decode($r['question'], ENT_QUOTES) . "</td><td>" . htmlspecialchars_decode($r[htmlspecialchars_decode($r['correctanswer'], ENT_QUOTES)], ENT_QUOTES) . "</td><td>" . htmlspecialchars_decode($r['marks'], ENT_QUOTES) . "</td>"
+                                    . "</td><td>" . htmlspecialchars_decode($r['question'], ENT_QUOTES) . "</td>";
+                                    
+                                    if(htmlspecialchars_decode($r['difficulty'], ENT_QUOTES) == 1)
+                                        echo "<td>Easy</td>";
+                                    elseif(htmlspecialchars_decode($r['difficulty'], ENT_QUOTES) == 2)
+                                        echo "<td>Medium</td>";
+                                    else
+                                        echo "<td>Hard</td>";
+                                    echo "<td>" 
+                                    . htmlspecialchars_decode($r[htmlspecialchars_decode($r['correctanswer'], ENT_QUOTES)], ENT_QUOTES) . "</td><td>" . htmlspecialchars_decode($r['marks'], ENT_QUOTES) . "</td>"
                                    . "<td class=\"tddata\"><a title=\"Edit " . $r['qnid'] . "\"href=\"update_question.php?qid=" . $r['qnid'] . "\"><img src=\"../images/edit.png\" height=\"30\" width=\"40\" alt=\"Edit\" /></a>"
                                     . "</td></tr>";
                                  }
+?>      
+                                <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Total Open ended Questions:</th>
+                                        <th><?php echo $r3['totalopquestion']; ?></th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                 <tr>
+                                         <th>&nbsp;</th>
+                                         <th>Qn.No</th>
+                                         <th>Open ended Question</th>
+                                         <th>Difficulty</th>
+                                         <th>Correct Answer</th>
+                                         <th>Marks</th>
+                                         <th>Edit</th>
+                                     </tr>
+                                     <?php
 
                                   while ($r2 = mysqli_fetch_array($result2)) {
                                      
                                          echo "<tr>";
                                       echo "<td><a href=delete_Opquestion.php?qid=".$r2['qnid']."><strong>DELETE</strong></a></td><td>" . htmlspecialchars_decode($r2['qnid'], ENT_QUOTES) 
-                                    . "</td><td>" . htmlspecialchars_decode($r2['question'], ENT_QUOTES) . "</td><td>" . htmlspecialchars_decode($r2['correctanswer'], ENT_QUOTES). "</td><td>" . htmlspecialchars_decode($r2['marks'], ENT_QUOTES) . "</td>"
+                                    . "</td><td>" . htmlspecialchars_decode($r2['question'], ENT_QUOTES) . "</td>";
+                                    
+                                    if(htmlspecialchars_decode($r2['difficulty'], ENT_QUOTES) == 1)
+                                        echo "<td>Easy</td>";
+                                    elseif(htmlspecialchars_decode($r2['difficulty'], ENT_QUOTES) == 2)
+                                        echo "<td>Medium</td>";
+                                    else
+                                        echo "<td>Hard</td>";
+                                    echo "<td>" . htmlspecialchars_decode($r2['correctanswer'], ENT_QUOTES). "</td><td>" . htmlspecialchars_decode($r2['marks'], ENT_QUOTES) . "</td>"
                                    . "<td class=\"tddata\"><a title=\"Edit " . $r['qnid'] . "\"href=\"update_Opquestion.php?qid=" . $r2['qnid'] . "\"><img src=\"../images/edit.png\" height=\"30\" width=\"40\" alt=\"Edit\" /></a>"
                                     . "</td></tr>";
                                  }

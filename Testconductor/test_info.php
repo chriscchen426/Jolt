@@ -45,12 +45,16 @@ $num = mysqli_num_rows($result);
                <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="../images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
             
             </div>
+            <?php 
+            	include 'header.html';
+            ?>
             <form action="test_info.php" method="post">
             <div class="menubar">
 
 
                     <ul id="menu">
 <?php
+
 if (isset($_SESSION['tcname'])) {
     // Navigations
 ?>

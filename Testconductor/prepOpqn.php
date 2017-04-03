@@ -20,7 +20,7 @@ if (isset($_POST['cancel']) == 'Cancel') {
 if(isset($_POST['addOp'])){
 	
 include '../mysqli_connect.php';
-if (strcmp($_POST['correctans'], "<Choose the Correct Answer>") == 0 || empty($_POST['question']) || empty($_POST['optiona'])  || empty($_POST['marks'])) {
+if (strcmp($_POST['difficulty'], "<Choose the Difficulty>") == 0 || empty($_POST['question']) || empty($_POST['optiona'])  || empty($_POST['marks'])) {
 	$errors[] = 'Some of the required Fields are Empty';
 }else{
 
@@ -47,10 +47,12 @@ $qs = $_POST['question'];
 
 $a = $_POST['optiona'];
 
+$dif = $_POST['difficulty'];
+
 $marks = $_POST['marks'];
 
 $tid = (int)$_SESSION['testqn'];
-	$sql = "Insert into OpQuestion values($tid,$newstd,'$qs','$a',$marks,".$_SESSION['tcid'].")";  //need to modify
+	$sql = "Insert into OpQuestion values($tid,$newstd,'$qs','$a',$marks,".$_SESSION['tcid'].",$dif)";  //need to modify
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
@@ -166,6 +168,17 @@ else
                                 <tr>
                                     <td><b>Correct Answer</b></td>
                                     <td><input type="text" name="optiona" placeholder="*" value="<?php if(isset($_POST['optiona'])) echo $_POST['optiona'];?>" size="50"  /></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Difficulty</b></td>
+                                    <td>
+                                        <select name="difficulty">
+                                            <option value="<Choose the Difficulty>" selected>&lt;Choose the Difficulty&gt;</option>
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
+                                            <option value="3">Hard</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><b>Marks</b></td>

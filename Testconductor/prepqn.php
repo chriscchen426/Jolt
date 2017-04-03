@@ -20,7 +20,7 @@ if (isset($_POST['cancel']) == 'Cancel') {
 if(isset($_POST['add'])){
 	
 include '../mysqli_connect.php';
-if (strcmp($_POST['correctans'], "<Choose the Correct Answer>") == 0 || empty($_POST['question']) || empty($_POST['optiona']) || empty($_POST['optionb']) || empty($_POST['optionc']) || empty($_POST['optiond']) || empty($_POST['marks'])) {
+if (strcmp($_POST['difficulty'], "<Choose the Difficulty>") == 0 || strcmp($_POST['correctans'], "<Choose the Correct Answer>") == 0 || empty($_POST['question']) || empty($_POST['optiona']) || empty($_POST['optionb']) || empty($_POST['optionc']) || empty($_POST['optiond']) || empty($_POST['marks'])) {
 	$errors[] = 'Some of the required Fields are Empty';
 }else{
 if (strcasecmp($_POST['optiona'], $_POST['optionb']) == 0 || strcasecmp($_POST['optiona'], $_POST['optionc']) == 0 || strcasecmp($_POST['optiona'], $_POST['optiond']) == 0 || strcasecmp($_POST['optionb'], $_POST['optionc']) == 0 || strcasecmp($_POST['optionb'], $_POST['optiond']) == 0 || strcasecmp($_POST['optionc'], $_POST['optiond']) == 0) {
@@ -53,8 +53,9 @@ $c = $_POST['optionc'];
 $d = $_POST['optiond'];
 $marks = $_POST['marks'];
 $ans = $_POST['correctans'];
+$dif = $_POST['difficulty'];
 $tid = (int)$_SESSION['testqn'];
-	$sql = "Insert into Question values($tid,$newstd,'$qs','$a','$b','$c','$d','$ans',$marks,".$_SESSION['tcid'].")";
+	$sql = "Insert into Question values($tid,$newstd,'$qs','$a','$b','$c','$d','$ans',$marks,".$_SESSION['tcid'].",$dif)";
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
@@ -193,6 +194,17 @@ else
                                             <option value="optionb">Option B</option>
                                             <option value="optionc">Option C</option>
                                             <option value="optiond">Option D</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Difficulty</b></td>
+                                    <td>
+                                        <select name="difficulty">
+                                            <option value="<Choose the Difficulty>" selected>&lt;Choose the Difficulty&gt;</option>
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
+                                            <option value="3">Hard</option>
                                         </select>
                                     </td>
                                 </tr>

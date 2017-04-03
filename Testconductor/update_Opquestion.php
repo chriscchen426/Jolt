@@ -29,12 +29,12 @@ if (empty($_POST['question']) || empty($_POST['optiona']) || empty($_POST['marks
 	*/
 $qs = $_POST['question'];
 $a = $_POST['optiona'];
-
+$dif = $_POST['difficulty'];
 $marks = $_POST['marks'];
 
 		if(empty($errors)){
 
-			$q = "update OpQuestion set question = '$qs',correctanswer = '$a',marks = '$marks' where testid = $tid AND qnid = $qid";
+			$q = "update OpQuestion set question = '$qs',difficulty = '$dif',correctanswer = '$a',marks = '$marks' where testid = $tid AND qnid = $qid";
 			$r = @mysqli_query($dbc, $q);
 			if($r){
 				header('Location: exam_question_display.php');
@@ -160,6 +160,14 @@ echo '<br>';
 <tr> <td>Test ID: </td><td>  <input readonly type="text" name="t_id" size = "50" value="<?php if (isset($_POST['t_id'])) echo $_POST['t_id']; ?>" /></td></tr>
 <tr> <td>Question ID: </td><td>  <input readonly type="text" name="q_id" size = "50" value="<?php if (isset($_POST['q_id'])) echo $_POST['q_id']; ?>" /></td></tr>
 <tr> <td>Question </td><td>  <textarea name="question" cols="40" rows="5"  > <?php if (isset($_POST['question'])) echo $_POST['question']; ?></textarea></td></tr>
+<tr> <td>Difficulty </td><td>
+<select name="difficulty">
+                                            <option value="<?php if (isset($_POST['difficulty'])) echo $_POST['difficulty']; ?>" selected><?php if (isset($_POST['difficulty'])) echo $_POST['difficulty']; echo "~~"; ?></option>
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
+                                            <option value="3">Hard</option>
+                                         
+                                        </select></td></tr>
 <tr> <td>Correct Answer: </td><td>  <input type="text" name="optiona" size = "50" maxlength = "150" value="<?php if (isset($_POST['optiona'])) echo $_POST['optiona']; ?>" /></td></tr>
 
 <tr> <td>Marks: </td><td><input type="text" name="marks" size = "50" value="<?php if (isset($_POST['marks'])) echo $_POST['marks']; ?>" onkeyup="isnum(this)" /></td></tr>
@@ -198,6 +206,28 @@ $row = mysqli_fetch_array($r);
 <tr> <td>Test ID: </td><td>  <input readonly type="text" name="t_id" size = "50" value="<?php echo $row['testid']; ?>" /></td></tr>
 <tr> <td>Question ID: </td><td>  <input readonly type="text" name="q_id" size = "50" value="<?php echo $row['qnid']; ?>" /></td></tr>
 <tr> <td>Question </td><td>  <textarea name="question" cols="40" rows="5"  > <?php echo $row['question']; ?></textarea></td></tr>
+<tr> <td>Difficulty </td><td>  
+<select name="difficulty">	
+										<?php if($row['difficulty'] == 1){?>
+                                            <option value="<?php echo $row['difficulty']; ?>" selected><?php echo "Easy"; ?></option>
+                                          
+                                            <option value="2">Medium</option>
+                                            <option value="3">Hard</option>
+                                        <?php }
+                                        elseif($row['difficulty'] == 2){?>
+                                        	<option value="<?php echo $row['difficulty']; ?>" selected><?php echo "Medium"; ?></option>
+                                          
+                                            <option value="1">Easy</option>
+                                            <option value="3">Hard</option>
+                                    <?php }else {?>
+                                    		<option value="<?php echo $row['difficulty']; ?>" selected><?php echo "Hard"; ?></option>
+                                          
+                                            <option value="1">Easy</option>
+                                            <option value="2">Medium</option>
+
+                                    <?php }?>
+                                            
+                                        </select></td></tr>
 <tr> <td>Correct Answer: </td><td>  <input type="text" name="optiona" size = "50" maxlength = "150" value="<?php echo $row['correctanswer']; ?>" /></td></tr>
 
 <tr> <td>Marks: </td><td><input type="text" name="marks" size = "50" value="<?php echo $row['marks']; ?>" onkeyup="isnum(this)" /></td></tr>
