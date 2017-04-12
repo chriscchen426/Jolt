@@ -77,7 +77,7 @@ echo '<h4>&nbsp;</h4>';
                             <td><?php echo $r['fromdate']." To ".$r['todate']; ?></td>
                         </tr>
                         <tr>
-                            <td>Max. Marks</td>
+                            <td>Max. Score</td>
                             <td><?php echo $r['maxmarks']+$r['opmaxmarks']; ?></td>
                         </tr>
 
@@ -179,7 +179,7 @@ echo "</TABLE>\n";
                         <tr>
                             <th>Student Name</th>
                             <th>Email-ID</th>
-                            <th>Obtained Marks</th>
+                            <th>Obtained Score</th>
                             <th>Result(%)</th>
                             <th>Details</th>
 

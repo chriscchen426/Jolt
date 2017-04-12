@@ -1,67 +1,54 @@
-
 <?php
 session_start();
 
 if(isset($_POST['submit'])){
-	include 'mysqli_connect.php';
+	include '../mysqli_connect.php';
 	
 	$errors = array();
 	
-	if(!empty($_POST['e-mail']) && !empty($_POST['pass']))
+	if(!empty($_POST['aname']) && !empty($_POST['pass']))
 	{
-	$uemail = $_POST['e-mail'];
-	$cpass = $_POST['pass'];
-	$uemail = filter_input(INPUT_POST, 'e-mail', FILTER_VALIDATE_EMAIL);
-	if ($uemail == false) {
-		$errors[] = 'Submitted email address is invalid';
-	}else{
-	$sql = "select sname,sid,password from Student where email = '$uemail'";
+	$aname = $_POST['aname'];
+	$apass = $_POST['pass'];
 	
-	$r = @mysqli_query($dbc,$sql);
-	$num = mysqli_num_rows($r);
-	if($num == 0){
-		$errors[] = 'You entered wrong e-mail or e-mail does not exit';
-		//echo '<h2 style = color:#ff0000;">You entered wrong e-mail or e-mail does not exit.</h2><br>';
-	}else{
-	$row = mysqli_fetch_assoc($r);
-	$c_pass = $row['password'];
-	$stdid = (int) $row['sid'];
-	$stdname = $row['sname'];
-	if($cpass != $c_pass){
-		$errors[] = 'You entered wrong password';
-		//echo '<h2 style = color:#ff0000;">You entered wrong password.</h2><br>';
-	}
-	}
-	}
+		$sql = "select password from Admin where name = '$aname'";
+		//echo $sql;
+		
+		$r = @mysqli_query($dbc,$sql);
+		$num = mysqli_num_rows($r);
+		if($num == 0){
+			$errors[] = 'Invalid Login Credentials';
+			//echo '<h2 style = color:#ff0000;">You entered wrong e-mail or e-mail does not exit.</h2><br>';
+		}else{
+		$row = mysqli_fetch_assoc($r);
+		$a_pass = $row['password'];
+		echo $a_pass;
+		if($apass != $a_pass){
+			$errors[] = 'Invalid Login Credentials';
+			//echo '<h2 style = color:#ff0000;">You entered wrong password.</h2><br>';
+		}
+		}
+	
+//}
 	if(empty($errors)){
-		
-	session_start();
-	//$_SESSION['stdname']=$stdname;
-	$_SESSION['stdid']=$stdid;
-	
-	if($stdid = (int)$c_pass){
-	//header('Location: home.php');
-		//session_start();
-		//$_SESSION['stdid']=$stdid;
-		header('Location: preset.php');
-	}else{
+
 		session_start();
-		//$_SESSION['stdid']= $stdid;
-		$_SESSION['stdname']=$stdname;
-		header('Location: home.php');
+		$_SESSION['aname'] = $aname;
 		
-	}
-	
-}else{
-	
+		header('Location: home.php');
+
+	}else{
+
 		echo'<h2 align = "center"><p style = "color:#ff0000;"> Errors!</p><h2>';
 		foreach($errors as $msg){
 			echo '<h4 align = "center"><p style= "color:#ff0000"> ' .$msg. '<br  /></p><h4>';
-}
-}
-}
+			//echo "<h2 align = "center"><p style=\"color:#ff0000;\">" .$msg. "<br  />\n</p><h2>";
+		}
+	}
+	}
+	
+	}
 
-}
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +59,7 @@ if(isset($_POST['submit'])){
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Jolt Student Login</title>
+        <title>Jolt Admin Login Form</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -98,7 +85,8 @@ if(isset($_POST['submit'])){
     </head>
 
     <body>
-        <!-- Navigation -->
+
+    	<!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
             <div class="container topnav">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -123,7 +111,7 @@ if(isset($_POST['submit'])){
                             <a href="../conductor/cdt_login.php">Conductor</a>
                         </li>
                         <li>
-                            <a href="../admin/adm_login.php">Admin</a>
+                            <a href="../student/std_login.php">Student</a>
                         </li>
                     </ul>
                 </div>
@@ -139,10 +127,10 @@ if(isset($_POST['submit'])){
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>Students</strong> Login Form</h1>
+                            <h1><strong>Administrator</strong> Login Form</h1>
                             <div class="description">
                             	<p>
-	                            	Please login in with your Kean email.
+	                            	This is only for Administrator to manage the whole Jolt
                             	</p>
                             </div>
                         </div>
@@ -152,20 +140,20 @@ if(isset($_POST['submit'])){
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>Login to Jolt</h3>
-                            		<p>Enter your Kean email and password to log on:</p>
+                            		<p>Enter your email and password to log on:</p>
                         		</div>
                         		<div class="form-top-right">
-                        			<i class="fa fa-key"></i>
+                        			<i class="fa fa-lock"></i>
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="std_login.php" method="post" class="login-form">
+			                    <form role="form" action="adm_login.php" method="post" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">Email Address</label>
-			                        	<input type="text" name="e-mail" placeholder="Email..." class="form-username form-control" id="e-mail">
+			                    		<label class="sr-only" for="form-username">Username</label>
+			                        	<input type="text" name="aname" placeholder="E-mail..." class="form-username form-control" id="aname">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="pass">Password</label>
+			                        	<label class="sr-only" for="form-password">Password</label>
 			                        	<input type="password" name="pass" placeholder="Password..." class="form-password form-control" id="pass">
 			                        </div>
 			                        <button type="submit" name="submit" class="btn">Sign in!</button>
@@ -173,12 +161,7 @@ if(isset($_POST['submit'])){
 		                    </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3 social-login">
-                        	
-                        	</div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             

@@ -91,11 +91,11 @@ include 'nav.html';
                             <td><?php echo date('H:i:s', strtotime($r['dur'])+strtotime($r['opdur'])- strtotime('00:00:00')); ?></td>
                         </tr>
                         <tr>
-                            <td>Max. Marks</td>
+                            <td>Max. Score</td>
                             <td><?php echo $r['tm']+$r['optm']; ?></td>
                         </tr>
                         <tr>
-                            <td>Obtained Marks</td>
+                            <td>Obtained Score</td>
                             <td><?php echo $r['om']+$r['opom']; ?></td>
                         </tr>
                         <tr>
@@ -244,8 +244,8 @@ include 'nav.html';
                         <tr>
                             <th>Date and Time</th>
                             <th>Test Name</th>
-                            <th>Max. Marks</th>
-                            <th>Obtained Marks</th>
+                            <th>Max. Score</th>
+                            <th>Obtained Score</th>
                             <th>Percentage</th>
                             <th>Details</th>
                         </tr>
