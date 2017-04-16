@@ -32,8 +32,11 @@ $result = @mysqli_query($dbc, $r);
 $num = mysqli_num_rows($result);
 include 'nav.html';
 ?>
-<h4>&nbsp;</h4>
-<h4>&nbsp;</h4>
+
+<div class="container">
+	<img style="height: 40%; width: 100%" src="../img/newbg.png">
+
+</div>
         <div class="container">
         
            
@@ -112,7 +115,7 @@ if($num > 0){
 	
 	
 	?>
-	<li><input type="submit" value="Add Test" name="add" class="subbtn" title="Add"/></li>
+	<input type="submit" value="Add Test" name="add" class="btn btn-primary" title="Add"/>
 	</form>
 	</div>
 	</body>

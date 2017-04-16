@@ -104,6 +104,10 @@ echo '<h4>&nbsp;</h4>';
         <!-- /#page-content-wrapper -->
 
     </div>
+
+    <div class="view">
+        <!--Intro content-->
+        <div class="full-bg-img flex-center">
     <!-- /#wrapper -->
 
     <!-- jQuery -->

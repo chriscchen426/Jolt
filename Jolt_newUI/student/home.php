@@ -59,7 +59,7 @@ echo '<h4>&nbsp;</h4>';
                         <a href="home.php">Testing Module</a>
                     </li>
                     <li>
-                        <a href="#contact">Learning Module</a>
+                        <a href="../learningModule/index.html">Learning Module</a>
                     </li>
                     <li>
                         <a href="logout.php">Log out</a>
