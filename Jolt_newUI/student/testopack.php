@@ -30,7 +30,7 @@ include 'nav.html';
         ?>
      
       <div class="page">
-          <h3 style="text-align:center;">You have finished all test <b><a href="home.php">Click Here to Back</a></b> </h3>
+          <h3 style="text-align:center;">You have finished all tests <b><a href="home.php">Click Here to Back</a></b> </h3>
           <?php
                         //}
           ?>

@@ -43,7 +43,7 @@ if(isset($_POST['submit'])){
 	//header('Location: home.php');
 		//session_start();
 		//$_SESSION['stdid']=$stdid;
-		header('Location: preset.php');
+		header('Location: home.php');
 	}else{
 		session_start();
 		//$_SESSION['stdid']= $stdid;
@@ -142,7 +142,7 @@ if(isset($_POST['submit'])){
                             <h1><strong>Students</strong> Login Form</h1>
                             <div class="description">
                             	<p>
-	                            	Please login in with your Kean email.
+	                            	Please login with your Kean email.
                             	</p>
                             </div>
                         </div>

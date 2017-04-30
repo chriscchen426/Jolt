@@ -151,27 +151,27 @@ else
   <table class="table table-striped">
   <tr><td colspan= "4"> <Font color = "#FF0000">NOTE: ALL * Field Must Required.</Font></td></tr>
                                 <tr>
-                                    <td><b>Easy Multi-Choice Question No.</b></td>
+                                    <td><b>No. of Easy Multi-Choice Question</b></td>
                                     <td><input type="text" name="easy" placeholder="*" value="<?php ?>" size="50"  /></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Medium  Multi-Choice Question No.</b></td>
+                                    <td><b>No. of Medium  Multi-Choice Question</b></td>
                                     <td><input type="text" name="medium" placeholder="*" value="<?php ?>" size="50"  /></td>
                                 </tr>
 								<tr>
-                                    <td><b>Hard  Multi-Choice Question No.</b></td>
+                                    <td><b>No. of Hard  Multi-Choice Question</b></td>
                                     <td><input type="text" name="hard" placeholder="*" value="<?php ?>" size="50"  /></td>
                                 </tr>
 								<tr>
-                                    <td><b>Easy Open-ended Question No.</b></td>
+                                    <td><b>No. of Easy Open-ended Question</b></td>
                                     <td><input type="text" name="easyop" placeholder="*" value="<?php ?>" size="50"  /></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Medium Open-ended Question No.</b></td>
+                                    <td><b>No. of Medium Open-ended Question</b></td>
                                     <td><input type="text" name="mediumop" placeholder="*" value="<?php ?>" size="50"  /></td>
                                 </tr>
 								<tr>
-                                    <td><b>Hard Open-ended Question No.</b></td>
+                                    <td><b>No. of Hard Open-ended Question</b></td>
                                     <td><input type="text" name="hardop" placeholder="*" value="<?php ?>" size="50"  /></td>
                                 </tr>
                                 

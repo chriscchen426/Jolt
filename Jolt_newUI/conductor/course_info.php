@@ -4,8 +4,8 @@ if(!isset($_SESSION['tcname'])){
 	header('Location: index.php');
 }
 include '../mysqli_connect.php';
-echo '<h4>&nbsp;</h4>';
-echo '<h4>&nbsp;</h4>';
+// echo '<h4>&nbsp;</h4>';
+// echo '<h4>&nbsp;</h4>';
 echo '<div class="container">';
 $tcname = $_SESSION['tcname'];
 $tcid = $_SESSION['tcid'];
@@ -25,9 +25,12 @@ if (isset($_SESSION['tcname'])) {
     // Navigations
 ?>
                        
+<div class="container">
+    <img style="height: 40%; width: 100%" src="../img/newbg.png">
 
+</div>
 
-                 
+         <div class="container">        
             <?php
             } 
             

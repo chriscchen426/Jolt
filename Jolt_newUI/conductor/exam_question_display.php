@@ -60,15 +60,15 @@ if (isset($_SESSION['tcname'])) {
     // Navigations
 ?>
 
-   <li>
-<input type="submit" value="Upload MtQuestion" name="upload" class="subbtn">
-<input type="submit" value="Add MtQuestion" name="add" class="subbtn">
+   
+<input type="submit" value="Upload M.C.Question" name="upload" class="btn btn-primary">
+<input type="submit" value="Add M.C.Question" name="add" class="btn btn-primary">
 
 
-<input type="submit" value="Upload OpQuestion" name="uploadOp" class="subbtn">
-<input type="submit" value="Add OpQuestion" name="addOp" class="subbtn">
+<input type="submit" value="Upload Open_ended Question" name="uploadOp" class="btn btn-primary">
+<input type="submit" value="Add Open_ended Question" name="addOp" class="btn btn-primary">
 
-<input type="submit" value="Choose Questions from Bank" name="addbank" class="subbtn"></li>                    
+<input type="submit" value="Choose Questions from Bank" name="addbank" class="btn btn-primary">                  
 </tr>
 
 <?php
@@ -89,7 +89,7 @@ if (isset($_SESSION['tcname'])) {
 
  	?>
                                  <table class="table table-striped">
-                                    <tr>
+                                    <tr style="background-color: #e0e0e0">
                                         
                                         <th colspan="3">Total Multiple Questions in this test:</th>
                                         <th><?php echo $r3['totalquestions']; ?></th>
@@ -99,13 +99,13 @@ if (isset($_SESSION['tcname'])) {
                                         
                                     </tr>
 
-                                     <tr>
+                                     <tr style="color: #245580">
                                          <th>&nbsp;</th>
                                          <th>Qn.No</th>
                                          <th>Multiple Choice Question</th>
                                          <th>Difficulty</th>
                                          <th>Correct Answer</th>
-                                         <th>Marks</th>
+                                         <th>Score</th>
                                          <th>Edit</th>
                                      </tr>
  <?php
@@ -127,7 +127,7 @@ if (isset($_SESSION['tcname'])) {
                                     . "</td></tr>";
                                  }
 ?>      
-                                <tr>
+                                <tr style="background-color: #e0e0e0">
                                         
                                         <th colspan="3">Total Open ended Questions in this test:</th>
                                         <th><?php echo $r3['totalopquestion']; ?></th>
@@ -136,13 +136,13 @@ if (isset($_SESSION['tcname'])) {
                                         <th>&nbsp;</th>
                                         
                                     </tr>
-                                 <tr>
+                                 <tr style="color: #265a88">
                                          <th>&nbsp;</th>
                                          <th>Qn.No</th>
                                          <th>Open ended Question</th>
                                          <th>Difficulty</th>
                                          <th>Correct Answer</th>
-                                         <th>Marks</th>
+                                         <th>Score</th>
                                          <th>Edit</th>
                                      </tr>
                                      <?php

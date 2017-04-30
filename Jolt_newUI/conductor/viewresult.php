@@ -18,19 +18,20 @@ if(isset($_REQUEST['back'])) {
 
 }
 ?>
-<div id="container">
-            <div class="header">
-                <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="../images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Online Examination System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
-            </div>
+<div class="container">
+<h4>&nbsp;</h4>
+<h4>&nbsp;</h4>
+           
             <form id="summary" action="viewresult.php" method="post">
             <div class="menubar">
                     <ul id="menu">
             <?php 
+include 'nav.html';
 // Navigations
 if(isset($_REQUEST['details']) && isset($_REQUEST['stdid'])) {
 	?>
-   <li><input type="submit" value="Back" name="back" class="subbtn" title="Manage Results"></li>
-   <li><input type="button" value="Print Preview" class="subbtn" onClick="printPage(printsection.innerHTML)"></li>
+   <input type="submit" value="Back" name="back" class="btn btn-primary" title="Manage Results">
+   <input type="button" value="Print Preview" class="btn btn-primary" onClick="printPage(printsection.innerHTML)">
   </ul>
     </div>
     <div id="printsection"> 
@@ -88,7 +89,7 @@ printpage.focus();
 
                                 $r=mysqli_fetch_array($result);
                                 ?>
-                    <table cellpadding="20" cellspacing="30" border="0" style="background:#ffffff url(images/page.gif);text-align:left;line-height:20px;">
+                    <table class="table table-striped" cellpadding="20" cellspacing="30" border="0" style="background:#ffffff url(images/page.gif);text-align:left;line-height:20px;">
                         <tr>
                             <td colspan="2"><h3 style="color:#0000cc;text-align:center;">Test Summary</h3></td>
                         </tr>
@@ -116,7 +117,7 @@ printpage.focus();
                             <td><?php echo date('H:i:s', strtotime($r['dur'])+strtotime($r['opdur'])- strtotime('00:00:00')); ?></td>
                         </tr>
                         <tr>
-                            <td>Max. Score</td>
+                            <td>Test Score</td>
                             <td><?php echo $r['tm']+$r['optm']; ?></td>
                         </tr>
                         <tr>
@@ -150,7 +151,7 @@ printpage.focus();
                                 }
                                 else {
                                     ?>
-                    <table cellpadding="30" cellspacing="10" class="datatable">
+                    <table class="table table-striped" cellpadding="30" cellspacing="10" class="datatable">
                         <tr>
                             <th>Q. No</th>
                             
@@ -182,10 +183,10 @@ printpage.focus();
                             <td><?php echo $r2['stdmarks']; ?></td>
                                                     <?php
                                                     if($r2['stdmarks']==0) {
-                                                        echo"<td class=\"tddata\"><img src=\"../images/wrong.png\" title=\"Wrong Answer\" height=\"30\" width=\"40\" alt=\"Wrong Answer\" /></td>";
+                                                        echo"<td class=\"tddata\"><img src=\"../img/wrong.png\" title=\"Wrong Answer\" height=\"30\" width=\"40\" alt=\"Wrong Answer\" /></td>";
                                                     }
                                                     else {
-                                                        echo"<td class=\"tddata\"><img src=\"../images/correct.png\" title=\"Correct Answer\" height=\"30\" width=\"40\" alt=\"Correct Answer\" /></td>";
+                                                        echo"<td class=\"tddata\"><img src=\"../img/correct.png\" title=\"Correct Answer\" height=\"30\" width=\"40\" alt=\"Correct Answer\" /></td>";
                                                     }
                                                     ?>
                         </tr>
@@ -211,7 +212,7 @@ printpage.focus();
                                 }
                                 else {
                                     ?>
-                    <table cellpadding="30" cellspacing="10" class="datatable">
+                    <table class="table table-striped" cellpadding="30" cellspacing="10" class="datatable">
                         <tr>
                             <th>Q. No</th>
                             
@@ -265,11 +266,11 @@ printpage.focus();
                             else {
                             //editing components
                                 ?>
-                    <table cellpadding="30" cellspacing="10" class="datatable">
+                    <table class="table table-striped" cellpadding="30" cellspacing="10" class="datatable">
                         <tr>
                             <th>Date and Time</th>
                             <th>Test Name</th>
-                            <th>Max. Score</th>
+                            <th>Test Score</th>
                             <th>Obtained Score</th>
                             <th>Percentage</th>
                             <th>Details</th>
@@ -315,7 +316,7 @@ printpage.focus();
                                         else {
                                             echo "<td>".round((($om/$tm)*100), 1)." %</td>";
                                         }
-                                        echo"<td class=\"tddata\"><a title=\"Details\" href=\"viewresult.php?details=".$r['testid']."\"><img src=\"images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
+                                        echo"<td class=\"tddata\"><a title=\"Details\" href=\"viewresult.php?details=".$r['testid']."\"><img src=\"../img/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
                                     }
 
                                     ?>

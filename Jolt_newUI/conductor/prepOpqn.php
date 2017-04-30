@@ -61,7 +61,9 @@ $tid = (int)$_SESSION['testqn'];
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
-	$success[] = 'New question has been created. <a href="prepqn.php">Add More Question</a><a href="exam_question_display.php">Click to see</a>';
+	$success[] = '<h2>New question has been created. </h2>
+		<h2><a href="prepOpqn.php">Add More Question.</a></h2>
+		<h2><a href="exam_question_display.php">Click to view all questions.</a></h>';
 		//exit();
 		header('Location: exam_question_display.php');
 		
@@ -129,7 +131,7 @@ echo '<br>';
 ?>
    <div class="container">
             
-    <h2 style = "color : #0000FF">Question Preparation Form</h2><br>
+    <h2 style = "color : #0000FF">Create an Open_ended Question</h2><br>
     <form action = "prepOpqn.php" method="post">
     <?php
     
@@ -168,16 +170,16 @@ else
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Marks</b></td>
+                                    <td><b>Score</b></td>
                                     <td><input type="text" name="marks" placeholder="*" size="30" value="<?php if(isset($_POST['marks'])) echo $_POST['marks'];?>" onkeyup="isnum(this)" /></td>
 
                                 </tr>
 
                             </table>
-                            </div>
+                           
                             <br>
-          <input type="submit" name="addOp" value="Add Question" class="subbtn"/>
-          <input type="submit" value="Cancel" name="cancel" class="subbtn">
+          <input type="submit" name="addOp" value="Add Question" class="btn btn-primary"/>
+          <input type="submit" value="Cancel" name="cancel" class="btn btn-primary">
              </form>
              </div>
             </body>

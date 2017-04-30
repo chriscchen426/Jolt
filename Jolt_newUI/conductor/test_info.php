@@ -69,7 +69,7 @@ if($num > 0){
                                             <th>Test Description</th>
                                             <th>Course Name</th>
                                             <th>Test Secret Code</th>
-                                            <th>Validity</th>
+                                            <th>Available</th>
                                             <th>Edit</th>
                                             <th style="text-align:center;">Manage<br/>Questions</th>
 		                                     

@@ -18,15 +18,14 @@ if(isset($_REQUEST['back'])) {
 
 }
 ?>
-<div id="container">
-            <div class="header">
-                <img style="margin:10px 2px 2px 10px;float:left;" height="90" width="250" src="../images/logo.JPG" alt="OES"/><h3 class="headtext"> &nbsp;Java Online Learning and Testing System </h3><h4 style="color:#ffffff;text-align:center;margin:0 0 5px 5px;"><i></i></h4>
-            </div>
+<div class="container">
+            
             <form id="summary" action="graderesult.php" method="post">
             <div class="menubar">
                     <ul id="menu">
             <?php 
 // Navigations
+            include 'nav.html';
 if(isset($_REQUEST['details']) && isset($_REQUEST['stdid'])) {
     ?>
    <li><input type="submit" value="Back" name="back" class="subbtn" title="Manage Results"></li>
@@ -36,13 +35,7 @@ if(isset($_REQUEST['details']) && isset($_REQUEST['stdid'])) {
     <div id="printsection"> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-    <head>
-        <title>OES-View Result</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE"/>
-        <meta http-equiv="PRAGMA" content="NO-CACHE"/>
-        <meta name="ROBOTS" content="NONE"/>
+
 
         <link rel="stylesheet" type="text/css" href="../oes.css"/>
         <script type="text/javascript" src="../validate.js" ></script>
@@ -68,7 +61,7 @@ printpage.focus();
                   
 
                    
-                <div class="page">
+                <div class="container">
 
                         
                     
@@ -85,7 +78,7 @@ printpage.focus();
                                 }
                                 else {
                                     ?>
-                    <table cellpadding="30" cellspacing="10" class="datatable">
+                    <table cellpadding="30" cellspacing="10" class="table table-striped">
                         <tr>
                             <th>Q. No</th>
                             
@@ -117,10 +110,10 @@ printpage.focus();
                             <td><?php echo $r2['stdmarks']; ?></td>
                                                     <?php
                                                     if($r2['stdmarks']==0) {
-                                                        echo"<td class=\"tddata\"><img src=\"../images/wrong.png\" title=\"Wrong Answer\" height=\"30\" width=\"40\" alt=\"Wrong Answer\" /></td>";
+                                                        echo"<td class=\"tddata\"><img src=\"../img/wrong.png\" title=\"Wrong Answer\" height=\"30\" width=\"40\" alt=\"Wrong Answer\" /></td>";
                                                     }
                                                     else {
-                                                        echo"<td class=\"tddata\"><img src=\"../images/correct.png\" title=\"Correct Answer\" height=\"30\" width=\"40\" alt=\"Correct Answer\" /></td>";
+                                                        echo"<td class=\"tddata\"><img src=\"../img/correct.png\" title=\"Correct Answer\" height=\"30\" width=\"40\" alt=\"Correct Answer\" /></td>";
                                                     }
                                                     ?>
                         </tr>
@@ -147,7 +140,7 @@ printpage.focus();
                                 else {
                                     ?>
                     
-                    <table cellpadding="30" cellspacing="10" class="datatable">
+                    <table cellpadding="30" cellspacing="10" class="table table-striped">
                         <tr>
                             <th>Q. No</th>
                             
@@ -188,7 +181,7 @@ printpage.focus();
                                         }
                                         ?>
                             <tr>
-                                <th style="width:8%;text-align:right;"><h4><input type="submit" name="submit" value="Submit" class="subbtn"/></h4></th>      
+                                <th style="width:8%;text-align:right;"><h4><input type="submit" name="submit" value="Submit" class="btn btn-primary"/></h4></th>      
                             </tr>
                                         <?php
 

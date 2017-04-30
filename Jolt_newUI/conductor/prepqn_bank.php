@@ -129,7 +129,7 @@ foreach($success as $msg){
 echo '<br>';
 ?>
  <div class="container">
-    <h2 style = "color : #0000FF">Question Preparation Form</h2><br>
+    <h2 style = "color : #0000FF">Create a M.C. Question</h2><br>
     <form action = "prepqn_bank.php" method="post">
     <?php
     
@@ -183,7 +183,7 @@ echo '<br>';
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Marks</b></td>
+                                    <td><b>Score</b></td>
                                     <td><input type="text" name="marks" placeholder="*" size="30" value="<?php if(isset($_POST['marks'])) echo $_POST['marks'];?>" onkeyup="isnum(this)" /></td>
 
                                 </tr>

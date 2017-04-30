@@ -137,7 +137,7 @@ if(isset($_POST['submit'])){
                             <h1><strong>Conductor</strong> Login Form</h1>
                             <div class="description">
                             	<p>
-	                            	Please login in with your Kean email.
+	                            	Please login with your Kean email.
                             	</p>
                             </div>
                         </div>

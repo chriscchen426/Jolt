@@ -126,7 +126,7 @@ echo '<br>';
 ?>
    <div class="container">
            
-    <h2 style = "color : #0000FF">Question Preparation Form</h2><br>
+    <h2 style = "color : #0000FF">Create a M.C. Question</h2><br>
     <form action = "prepqn.php" method="post">
     <?php
     
@@ -190,7 +190,7 @@ else
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Marks</b></td>
+                                    <td><b>Score</b></td>
                                     <td><input type="text" name="marks" placeholder="*" size="30" value="<?php if(isset($_POST['marks'])) echo $_POST['marks'];?>" onkeyup="isnum(this)" /></td>
 
                                 </tr>
@@ -198,8 +198,8 @@ else
                             </table>
                          
                             <br>
-          <input type="submit" name="add" value="Add Question" class="subbtn"/>
-          <input type="submit" value="Cancel" name="cancel" class="subbtn">
+          <input type="submit" name="add" value="Add Question" class="btn btn-primary"/>
+          <input type="submit" value="Cancel" name="cancel" class="btn btn-primary">
              </form>
              </div>
             </body>

@@ -79,6 +79,10 @@ echo '<h4>&nbsp;</h4>';
 		$num = mysqli_num_rows($result);
 		if($num > 0){
 	?>
+    <div class="container">
+    <img style="height: 40%; width: 100%" src="../img/newbg.png">
+
+</div>
 
     <div class="container">
 	  <h2>Test information</h2>
@@ -122,9 +126,9 @@ echo '<h4>&nbsp;</h4>';
                     <ul class="list-inline">
                         
                         <li class="footer-menu-divider">&sdot;</li>
-                        <li>
+                        
                             <a href="viewresult.php">View Test Result</a>
-                        </li>
+                        
                         
                     </ul>
                 </div>

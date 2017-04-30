@@ -107,7 +107,7 @@ echo '<h4>&nbsp;</h4>';
                             <td><?php echo htmlspecialchars_decode($r1['email'],ENT_QUOTES); ?></td>
                             <td><?php echo $r1['om']; ?></td>
                             <td><?php echo round((($r1['om']/$r['maxmarks'])*100),1)." %"; ?></td>
-                          <?php echo "<td class=\"tddata\"><a title=\"Details\" href=\"graderesult.php?details=".$_REQUEST['testid']."&stdid=".$r1['sid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>";?>
+                          <?php echo "<td class=\"tddata\"><a title=\"Details\" href=\"graderesult.php?details=".$_REQUEST['testid']."&stdid=".$r1['sid']."\"><img src=\"../img/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>";?>
 
 
                         </tr>
@@ -161,8 +161,8 @@ echo '<h4>&nbsp;</h4>';
                                         else { echo "<tr>";}
                                         echo "<td>".htmlspecialchars_decode($r['testname'],ENT_QUOTES)."</td><td>".$r['fromdate']." To ".$r['todate']." PM </td><td>".htmlspecialchars_decode($r['cid'],ENT_QUOTES)."</td><td>"
                                             .htmlspecialchars_decode($r['cname'],ENT_QUOTES)."</td><td>".$r['attemptedstudents']."</td>"
-                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>"
-                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../images/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
+                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../img/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td>"
+                                            ."<td class=\"tddata\"><a title=\"Details\" href=\"grade.php?testid=".$r['testid']."\"><img src=\"../img/detail.png\" height=\"30\" width=\"40\" alt=\"Details\" /></a></td></tr>";
                                     }
                                     ?>
                     </table>

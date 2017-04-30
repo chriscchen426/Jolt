@@ -54,7 +54,9 @@ $tid = (int)$_SESSION['testqn'];
 	$result = @mysqli_query($dbc, $sql);
 	if($result){
 		
-	$success[] = 'New question has been created. <a href="prepqn.php">Add More Question</a>';
+	$success[] = '<h2>New question has been created. </h2>
+		<h2><a href="prepOpqn_bank.php">Add More Question.</a></h2>
+		<h2><a href="exam_questionbank_display.php">Click to view all questions.</a></h>';
 		//exit();
 		header('Location: exam_questionbank_display.php');
 		
@@ -120,7 +122,7 @@ foreach($success as $msg){
 echo '<br>';
 ?>
 <div class="container">
-    <h2 style = "color : #0000FF">Question Preparation Form</h2><br>
+    <h2 style = "color : #0000FF">Create an Open_ended Question</h2><br>
     <form action = "prepOpqn_bank.php" method="post">
     <?php
     
@@ -150,7 +152,7 @@ echo '<br>';
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><b>Marks</b></td>
+                                    <td><b>Score</b></td>
                                     <td><input type="text" name="marks" placeholder="*" size="30" value="<?php if(isset($_POST['marks'])) echo $_POST['marks'];?>" onkeyup="isnum(this)" /></td>
 
                                 </tr>

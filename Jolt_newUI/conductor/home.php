@@ -44,7 +44,7 @@ echo '<h4>&nbsp;</h4>';
                 </button>
 				<a class="navbar-brand" href="http://www.kean.edu"><img style="width: 64px;" src="../img/logo.JPG" alt="Dispute Bills">
         </a>
-                <a class="navbar-brand topnav" href="http://www.kean.edu/">Kean University</a>
+                <a class="navbar-brand topnav" style="font-size: 20px; color: #0000CD" href="../index.html"><b>Jolt</b></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

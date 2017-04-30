@@ -17,14 +17,17 @@ include '../mysqli_connect.php';
 
             }
 include 'nav.html';
-	echo '<h4>&nbsp;</h4>';
-echo '<h4>&nbsp;</h4>'; 
+
 ?>
 
         <?php
 
         
         ?>
+        <div class="container">
+    <img style="height: 40%; width: 100%" src="../img/newbg.png">
+
+</div>
         <div class="container">
             
             <form name="rsltmng" action="rsltmng.php" method="post">
@@ -73,11 +76,11 @@ echo '<h4>&nbsp;</h4>';
                             <td><?php echo $r['cid']." ".htmlspecialchars_decode($r['cname'],ENT_QUOTES); ?></td>
                         </tr>
                         <tr>
-                            <td>Validity</td>
+                            <td>Available</td>
                             <td><?php echo $r['fromdate']." To ".$r['todate']; ?></td>
                         </tr>
                         <tr>
-                            <td>Max. Score</td>
+                            <td>Test Score</td>
                             <td><?php echo $r['maxmarks']+$r['opmaxmarks']; ?></td>
                         </tr>
 
@@ -209,7 +212,7 @@ echo "</TABLE>\n";
                                 }
                                 ?>
                     </table>
-<li><input type="submit" value="Back" name="back" class="subbtn" title="Manage Results"/></li>
+<li><input type="submit" value="Back" name="back" class="btn btn-primary" title="Manage Results"/></li>
 
                         <?php
 
@@ -232,7 +235,7 @@ echo "</TABLE>\n";
                     <table class="table table-striped" cellpadding="30" cellspacing="10" class="datatable">
                         <tr>
                             <th>Test Name</th>
-                            <th>Validity</th>
+                            <th>Available</th>
                             <th>Course ID</th>
                             <th>Course Name</th>
                             <th>Attempted Students</th>

@@ -180,8 +180,8 @@ echo '<br>';
                             <td style = "color:#ff0000"><b>Note:</b><br/>Candidates must enter<br/>this code in order to <br/> take the test</td>
                         </tr>
                       </table><br>
-                    <input type="submit" name="add" value="Add Test" class="subbtn"/>
-                    <input type="submit" value="Cancel" name="cancel" class="subbtn">
+                    <input type="submit" name="add" value="Add Test" class="btn btn-primary"/>
+                    <input type="submit" value="Cancel" name="cancel" class="btn btn-primary">
                       </form>
 </div>
 
@@ -281,8 +281,8 @@ echo '<h4>&nbsp;</h4>';
                             <td style = "color:#ff0000"><b>Note:</b><br/>Candidates must enter<br/>this code in order to <br/> take the test</td>
                         </tr>
                       </table><br>
-                    <input type="submit" name="add" value="Add Test" class="subbtn"/>
-                    <input type="submit" value="Cancel" name="cancel" class="subbtn">
+                    <input type="submit" name="add" value="Add Test" class="btn btn-primary"/>
+                    <input type="submit" value="Cancel" name="cancel" class="btn btn-primary">
                     </form>
 </div>
 
